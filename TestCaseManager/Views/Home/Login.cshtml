@@ -1,0 +1,28 @@
+﻿<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="row">
+    <div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="form-horizontal" ng-submit="submit()">
+                            <div class="form-group">
+                                <label for="inputTitle" class="col-sm-3 control-label">Account</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputAccount" />
+                                </div>
+
+                                <label for="inputYear" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inputPassword"/>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                    <div class="alert alert-success" ng-style="postMsgVisible"><p>Login Successfull!</p></div>
+                </div>
+            </div>
+        </div>
+</div>
