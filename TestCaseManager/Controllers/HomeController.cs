@@ -10,6 +10,13 @@ namespace TestCaseManager.Controllers
     {
         public ActionResult Login()
         {
+            ViewBag.Title = "Log In Page";
+
+            return View();
+        }
+
+        public ActionResult Index()
+        {
             ViewBag.Title = "Home Page";
 
             return View();

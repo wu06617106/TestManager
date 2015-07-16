@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts {
+    @Scripts.Render("~/bundles/angularJS")
+}
+<h2>Index</h2>
+
+<div class="row" ng-app="PersonModual">
+    <div ng-controller="PersonCTRL" ng-init="getPersons();">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Persons</h2>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled" ng-repeat="person in Persons">
+                        <li>
+                            <strong><span>{{person.PersonName}}</span></strong>:  <span>{{person.Account}}</span> : <span>{{person.Password}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-danger" ng-style="errorMsgVisible"><p>{{errorMessage}}</p></div>
+        </div>
+    </div>
+</div>

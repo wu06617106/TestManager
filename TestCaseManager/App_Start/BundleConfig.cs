@@ -23,6 +23,11 @@ namespace TestCaseManager
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
+                        "~/Scripts/angular.js",
+                        "~/Scripts/LogInJavaScript.js"));
+
         }
     }
 }
