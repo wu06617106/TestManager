@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
+using TestCaseManager.Models;
+
+namespace TestCaseManager.Controllers
+{
+    public class SectionsController : ApiController
+    {
+        private TestCaseManageModelContext db = new TestCaseManageModelContext();
+
+        //for CreateSetcion
+        [HttpPost]
+        [ResponseType(typeof(Section))]
+        public async Task<IHttpActionResult> CreateSection(Section section)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Sections.Add(section);
+            await db.SaveChangesAsync();
+
+            return Ok(section);
+        }
+
+        [HttpPost]
+        [ResponseType(typeof(Section))]
+        public async Task<IHttpActionResult> EditSection(Section data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(data).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
+
+        // GET: api/Sections
+        public IQueryable<Section> GetSections()
+        {
+            return db.Sections;
+        }
+
+        // GET: api/Sections/5
+        [ResponseType(typeof(Section))]
+        public async Task<IHttpActionResult> GetSection(int id)
+        {
+            Section section = await db.Sections.FindAsync(id);
+            if (section == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(section);
+        }
+
+        // DELETE: api/Sections/5
+        [ResponseType(typeof(Section))]
+        public async Task<IHttpActionResult> DeleteSection(int id)
+        {
+            Section section = await db.Sections.FindAsync(id);
+            if (section == null)
+            {
+                return NotFound();
+            }
+
+            db.Sections.Remove(section);
+            await db.SaveChangesAsync();
+
+            return Ok(section);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool SectionExists(int id)
+        {
+            return db.Sections.Count(e => e.SectionId == id) > 0;
+        }
+    }
+}

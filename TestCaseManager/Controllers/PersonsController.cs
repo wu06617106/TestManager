@@ -17,6 +17,7 @@ namespace TestCaseManager.Controllers
     {
         private TestCaseManageModelContext db = new TestCaseManageModelContext();
 
+        //for Log In
         [HttpPost]
         [ResponseType(typeof(Person))]
         public async Task<IHttpActionResult> LogIn(PersonDTO personData)
@@ -35,8 +36,7 @@ namespace TestCaseManager.Controllers
             return Ok(person);
         }
 
-        // POST: api/Persons
-        [ResponseType(typeof(Person))]
+        //for Register
         public async Task<IHttpActionResult> Regester(Person person)
         {
             if (!ModelState.IsValid)
@@ -49,6 +49,28 @@ namespace TestCaseManager.Controllers
 
             return Ok(person);
             //return CreatedAtRoute("DefaultApi", new { id = person.PersonId }, person);
+        }
+
+        [HttpPost]
+        [ResponseType(typeof(Person))]
+        public async Task<IHttpActionResult> EditPerson(Person data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(data).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+            return Ok(data);
         }
 
 

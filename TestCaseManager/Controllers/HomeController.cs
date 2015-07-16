@@ -21,5 +21,19 @@ namespace TestCaseManager.Controllers
 
             return View();
         }
+
+        public ActionResult TestSection()
+        {
+            ViewBag.Title = "Test Section Page";
+
+            return View();
+        }
+
+        public ActionResult TestTestCase()
+        {
+            ViewBag.Title = "Test TestCase Page";
+
+            return View();
+        }
     }
 }

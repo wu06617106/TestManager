@@ -26,7 +26,8 @@ namespace TestCaseManager
 
             bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
                         "~/Scripts/angular.js",
-                        "~/Scripts/LogInJavaScript.js"));
+                        "~/Scripts/LogInJavaScript.js",
+                        "~/Scripts/SectionJavaScript.js"));
 
         }
     }

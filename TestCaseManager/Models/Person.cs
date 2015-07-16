@@ -9,11 +9,6 @@ namespace TestCaseManager.Models
     [Table("Person")]
     public partial class Person
     {
-        public Person()
-        {
-            Sections = new HashSet<Section>();
-        }
-
         public int PersonId { get; set; }
 
         [Required]
@@ -30,7 +25,5 @@ namespace TestCaseManager.Models
 
         [StringLength(250)]
         public string ChildSectionIdList { get; set; }
-
-        public virtual ICollection<Section> Sections { get; set; }
     }
 }

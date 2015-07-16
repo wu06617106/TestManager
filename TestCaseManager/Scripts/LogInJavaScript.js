@@ -1,6 +1,5 @@
 ﻿var PersonModual = angular.module("PersonModual", []);
 PersonModual.controller("PersonCTRL", function ($scope, $http) {
-    $scope.Persons = [];
     $scope.account;
     $scope.password;
     $scope.person;
@@ -40,6 +39,20 @@ PersonModual.controller("PersonCTRL", function ($scope, $http) {
             $scope.person = data;
             $scope.account = $scope.person.PersonId;
             $scope.password = $scope.person.PersonName;
+            $scope.successMsgVisible = { 'visibility': 'visible' };
+            $scope.errorMsgVisible = { 'visibility': 'hidden' };
+        }).error(function (data, status, headers, config) {
+            $scope.errorMsgVisible = { 'visibility': 'visible' };
+            $scope.successMsgVisible = { 'visibility': 'hidden' };
+        });
+    }
+
+    $scope.EditPerson = function () {
+        $scope.person.ChildSectionIdList = "1 2";
+        $http.post("/api/Persons/EditPerson", $scope.person).success(function (data, status, headers, config) {
+            $scope.person = data;
+            $scope.account = $scope.person.PersonName;
+            $scope.password = $scope.person.ChildSectionIdList;
             $scope.successMsgVisible = { 'visibility': 'visible' };
             $scope.errorMsgVisible = { 'visibility': 'hidden' };
         }).error(function (data, status, headers, config) {

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "TestSection";
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/angularJS")
+}
+<h2>TestSection</h2>
+
+<div class="row">
+    <div ng-app="SectionModual">
+        <div class="col-md-4" ng-controller="SectionCTRL">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" ng-submit="submit()">
+                        <div class="form-group">
+                            <label for="inputTitle" class="col-sm-3 control-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="title" id="inputAccount" />
+                            </div>
+
+                            <label for="inputYear" class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="description" id="inputPassword" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+                <div class="alert alert-success" ng-style="successMsgVisible"><p>{{successMessage}}</p></div>
+                <div class="alert alert-danger" ng-style="errorMsgVisible"><p>{{errorMessage}}</p></div>
+            </div>
+            <div>
+                <input type="button" value="Get" ng-click="GetSection()">
+                <input type="button" value="Edit" ng-click="EditSection()">
+            </div>
+        </div>    
+    </div>
+</div>

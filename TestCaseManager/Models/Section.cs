@@ -20,12 +20,11 @@ namespace TestCaseManager.Models
         [StringLength(250)]
         public string SectionTitle { get; set; }
 
-        public int PersonId { get; set; }
+        [StringLength(250)]
+        public string SectionDescription { get; set; }
 
         [StringLength(250)]
         public string ChildSectionIdList { get; set; }
-
-        public virtual Person Person { get; set; }
 
         public virtual ICollection<TestCase> TestCases { get; set; }
     }
