@@ -13,27 +13,34 @@
             node.toggle();
         };
 
+        //create new tree
+        $scope.createNewTree = function () {
+            if ($scope.tree.length == 0)
+            {
+                $scope.tree.push({"id":1,"title":"node","nodes":[]})
+            }
+        };
+
         //edit tree node 
         $scope.editNodeData;
-        $scope.items = ['item1', 'item2', 'item3'];
-
         $scope.animationsEnabled = true;
         $scope.editNode = function (node, size) {
             $scope.editNodeData = node.$modelValue;
+            //new modal instance
             var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'nodeContent.html',
                 controller: 'ModalInstanceCtrl',
                 size: size,
                 resolve: {
-                    items: function () {
-                        return $scope.items;
+                    title: function () {
+                        return $scope.editNodeData.title;
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
+            modalInstance.result.then(function (editedNodeData) {
+                $scope.editNodeData.title = editedNodeData;
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
@@ -50,39 +57,37 @@
         };
 
         //temp tree data
-        $scope.tree1 = [{
+        $scope.tree = [{
             "id": 1,
-            "title": "tree1 - item1",
+            "title": "tree - item1",
             "nodes": [],
         }, {
             "id": 2,
-            "title": "tree1 - item2",
+            "title": "tree - item2",
             "nodes": [],
         }, {
             "id": 3,
-            "title": "tree1 - item3",
+            "title": "tree - item3",
             "nodes": [],
         }, {
             "id": 4,
-            "title": "tree1 - item4",
+            "title": "tree - item4",
             "nodes": [],
         }];
     });
 
     //Modal Instance controller
-    indexApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+    
+    indexApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, title) {
+        $scope.editNodeTitle = title;
+        
 
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
+        $scope.ok = function () {
+            $modalInstance.close($scope.editNodeTitle);
+        };
 
-    $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-});
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    });
 })();

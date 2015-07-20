@@ -26,15 +26,14 @@
     <!-- Edit node dialog template -->
     <script type="text/ng-template" id="nodeContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">{{editNodeData.title}}</h3>
+            <h3 class="modal-title">{{editNodeTitle}}</h3>
         </div>
         <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a ng-click="selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+            <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="editNodeTitle" id="inputEditNodeTitle" />
+            </div>
+
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
@@ -47,10 +46,10 @@
         <h3>Connected lists</h3>
         <div class="row">
             <div class="col-sm-6">
-                <h3>Tree 1</h3>
-                <div ui-tree id="tree1-root">
-                    <ol ui-tree-nodes="" ng-model="tree1">
-                        <li ng-repeat="node in tree1" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
+                <h3>Tree<a class="pull-left btn btn-primary btn-xs" data-nodrag ng-click="createNewTree()" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a></h3>
+                <div ui-tree id="tree-root">
+                    <ol ui-tree-nodes="" ng-model="tree">
+                        <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
                     </ol>
                 </div>
             </div>  
@@ -59,7 +58,7 @@
         <h3>Data binding</h3>
         <div class="row">
             <div class="col-sm-6">
-                <pre class="code">{{ tree1 | json }}</pre>
+                <pre class="code">{{ tree | json }}</pre>
             </div>
         </div>
 
