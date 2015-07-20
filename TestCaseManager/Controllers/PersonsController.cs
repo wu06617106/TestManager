@@ -37,7 +37,7 @@ namespace TestCaseManager.Controllers
         }
 
         //for Register
-        public async Task<IHttpActionResult> Regester(Person person)
+        public async Task<IHttpActionResult> Register(Person person)
         {
             if (!ModelState.IsValid)
             {

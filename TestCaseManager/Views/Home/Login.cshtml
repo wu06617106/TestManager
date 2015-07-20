@@ -2,70 +2,66 @@
     ViewBag.Title = "Index";
 }
 @section scripts {
-    @Scripts.Render("~/bundles/angularJS")
+    @Scripts.Render("~/Scripts/MyScripts/LoginJavaScript.js")
 }
 
 <div class="page-header">
     <h1>Login</h1>
 </div>
 <div class="row">
-    <div ng-app="PersonModual" >
-        <div class="col-md-4" ng-controller="PersonCTRL">
+    <div ng-app="PersonModule" ng-controller="PersonCtrl">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form class="form-horizontal" ng-submit="submit()">
                         <div class="form-group">
-                            <label for="inputTitle" class="col-sm-3 control-label">Account</label>
+                            <label class="col-sm-3 control-label">Account</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" ng-model="account" id="inputAccount" />
                             </div>
 
-                            <label for="inputYear" class="col-sm-3 control-label">Password</label>
+                            <label class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" ng-model="password" id="inputPassword" />
+                                <input type="password" class="form-control" ng-model="password" id="inputPassword" />
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                 </div>
-                <div class="alert alert-success" ng-style="successMsgVisible"><p>{{successMessage}}</p></div>
-                <div class="alert alert-danger" ng-style="errorMsgVisible"><p>{{errorMessage}}</p></div>
+                <div class="alert alert-success" ng-style="successMsgVisible"><p>Login Successful!</p></div>
+                <div class="alert alert-danger" ng-style="errorMsgVisible"><p>Login Error!</p></div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">Add Person</h2>
-                    </div>
+        </div>
 
-                    <div class="panel-body">
-                        <form class="form-horizontal" ng-submit="Regigster()">
-                            <div class="form-group" data-bind="with: newBook">
-                                <label for="inputTitle" class="col-sm-2 control-label">Account</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputTitle" ng-model="RegesterAccount" />
-                                </div>
-
-                                <label for="inputYear" class="col-sm-2 control-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputYear" ng-model="RegesterPassword" />
-                                </div>
-
-                                <label for="inputGenre" class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputGenre" ng-model="RegesterName" />
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-                        <div class="alert alert-success" ng-style="successMsgVisible"><p>{{successMessage}}</p></div>
-                        <div class="alert alert-danger" ng-style="errorMsgVisible"><p>{{errorMessage}}</p></div>
-                    </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Add Person</h2>
                 </div>
-            </div>
-            <div>
-                <form class="form-horizontal" ng-submit="EditPerson()">
-                    <button type="submit" class="btn btn-default">TestEdit</button>
-                </form>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" ng-submit="regigster()">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Account</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="registerAccount" ng-model="registerAccount" />
+                            </div>
+
+                            <label class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="registerPassword" ng-model="registerPassword" />
+                            </div>
+
+                            <label class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="registerName" ng-model="registerName" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <div class="alert alert-success" ng-style="successMsgVisible"><p>Add Successful!</p></div>
+                    <div class="alert alert-danger" ng-style="errorMsgVisible"><p>Error!</p></div>
+                </div>
             </div>
         </div>
     </div>

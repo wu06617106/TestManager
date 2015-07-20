@@ -17,18 +17,17 @@ namespace TestCaseManager
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/ui-bootstrap-tpls-{version}.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/tree.css",
+                      "~/Content/angular-ui-tree.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
                         "~/Scripts/angular.js",
-                        "~/Scripts/LogInJavaScript.js",
-                        "~/Scripts/SectionJavaScript.js"));
-
+                        "~/Scripts/angular-route.min.js"));
         }
     }
 }
