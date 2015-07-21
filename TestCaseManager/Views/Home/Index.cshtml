@@ -4,10 +4,45 @@
 }
 
 
-<body ng-app="treesApp">
-
+<body ng-app="treesApp" ng-controller="treesCtrl">
     <!-- Nested node template -->
-    <script type="text/ng-template" id="nodes_renderer1.html">
+    <script type="text/ng-template" id="nodes_renderer.html">
+        <div ui-tree-handle class="tree-node">
+            <div class="group-title tree-node-content">
+                <a>{{node.title}}</a>
+                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputTestCase(this)" style="margin-right: 8px;">Add Test Case</span></a>
+                <!--input test case section-->
+                <div class="form-group">
+                    <div id="inputTestCase" ng-show="isNodeSelected(this)">
+                        <input type="text" class="form-control" id="inputTitle" ng-model="inputTestCase.title" />
+                        <a class="btn btn-primary btn-xs" data-nodrag ng-click="newInutNameTestCase(this); closeInputTestCase(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
+                        <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputTestCase(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ol ui-tree-nodes="" ng-model="node.testcases" ng-class="{hidden: collapsed}">
+            <li ng-repeat="node in node.testcases" ui-tree-node ng-include="'test_cases_renderer.html'">
+            </li>
+        </ol>
+        <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+            </li>
+        </ol>
+    </script>
+    <!-- Test cases node template-->
+    <script type="text/ng-template" id="test_cases_renderer.html">
+        <div ui-tree-handle class="tree-node-content">
+            <div class="tree-node-content">
+                <a>{{node.title}}</a>
+                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+            </div>
+        </div>
+    </script>
+
+    <!-- Simple Nested node template -->
+    <script type="text/ng-template" id="simple_nodes_renderer.html">
         <div ui-tree-handle class="tree-node">
             <div class="tree-node-content">
                 <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
@@ -18,7 +53,7 @@
             </div>
         </div>
         <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer1.html'">
+            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'simple_nodes_renderer.html'">
             </li>
         </ol>
     </script>
@@ -29,39 +64,47 @@
             <h3 class="modal-title">{{editNodeTitle}}</h3>
         </div>
         <div class="modal-body">
-            <label for="inputTitle" class="col-sm-2 control-label">Title</label>
-            <div class="col-sm-10">
+            <label for="inputTitle" class="control-label">Title</label>
+            <div>
                 <input type="text" class="form-control" ng-model="editNodeTitle" id="inputEditNodeTitle" />
             </div>
-
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
-
-    <!-- Tree -->
-    <div class="container" ng-controller="treesCtrl">
-        <h3>Connected lists</h3>
+    <!-- Test Cases -->
+    <div class="col-sm-8 container">
         <div class="row">
-            <div class="col-sm-6">
-                <h3>Tree<a class="pull-left btn btn-primary btn-xs" data-nodrag ng-click="createNewTree()" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a></h3>
-                <div ui-tree id="tree-root">
+            <div class="col-sm-8">
+                <h3>Test Cases</h3>
+                <div ui-tree id="tree-root" data-nodrag>
                     <ol ui-tree-nodes="" ng-model="tree">
-                        <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
+                        <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer.html'"></li>
                     </ol>
                 </div>
-            </div>  
+            </div>
         </div>
-
         <h3>Data binding</h3>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <pre class="code">{{ tree | json }}</pre>
             </div>
         </div>
-
+    </div>
+    <!-- Sections Tree -->
+    <div class="col-sm-4 container">
+        <div class="row">
+            <div>
+                <h3>Sections<a class="pull-right btn btn-primary btn-xs" ng-click="insertNewNode()" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a></h3>
+                <div ui-tree id="tree-root">
+                    <ol ui-tree-nodes="" ng-model="tree">
+                        <li ng-repeat="node in tree" ui-tree-node ng-include="'simple_nodes_renderer.html'"></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 @section scripts {
