@@ -8,9 +8,9 @@
     <!-- Nested node template -->
     <script type="text/ng-template" id="nodes_renderer.html">
         <div ui-tree-handle class="tree-node">
-            <div class="group-title tree-node-content">
+            <div class="tree-node-content">
                 <a>{{node.title}}</a>
-                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputTestCase(this)" style="margin-right: 8px;">Add Test Case</span></a>
+                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputTestCase(this)" style="margin-right: 8px;">Add Test Case</a>
                 <!--input test case section-->
                 <div class="form-group">
                     <div id="inputTestCase" ng-show="isNodeSelected(this)">
@@ -32,7 +32,7 @@
     </script>
     <!-- Test cases node template-->
     <script type="text/ng-template" id="test_cases_renderer.html">
-        <div ui-tree-handle class="tree-node-content">
+        <div ui-tree-handle class="tree-node-test-case">
             <div class="tree-node-content">
                 <a>{{node.title}}</a>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>

@@ -67,8 +67,6 @@
             nodeData.testcases.push({
                 id: nodeData.id * 10 + nodeData.testcases.length,
                 title: nodeData.title + '.' + (nodeData.testcases.length + 1),
-                nodes: [],
-                testcases: []
             });
         };
 
@@ -79,8 +77,6 @@
             nodeData.testcases.push({
                 id: nodeData.id * 10 + nodeData.testcases.length,
                 title: $scope.inputTestCase.title,
-                nodes: [],
-                testcases: []
             });
         };
 
