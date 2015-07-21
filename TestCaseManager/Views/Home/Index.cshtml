@@ -7,14 +7,14 @@
 <body ng-app="treesApp" ng-controller="treesCtrl">
     <!-- Nested node template -->
     <script type="text/ng-template" id="nodes_renderer.html">
-        <div ui-tree-handle class="tree-node">
+        <div class="tree-node">
             <div class="tree-node-content">
-                <a>{{node.title}}</a>
-                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputTestCase(this)" style="margin-right: 8px;">Add Test Case</a>
+                <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
+                <span style="cursor:default"  class="pull-right btn-primary btn-xs" data-nodrag ng-click="openInputTestCase(this)" style="margin-right: 8px;">Add Test Case</span>
                 <!--input test case section-->
                 <div class="form-group">
                     <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                        <input type="text" class="form-control" id="inputTitle" ng-model="inputTestCase.title" />
+                        <input required type="text" class="form-control" id="inputTitle" ng-model="inputTestCase.title" />
                         <a class="btn btn-primary btn-xs" data-nodrag ng-click="newInutNameTestCase(this); closeInputTestCase(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
                         <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputTestCase(this)"><span class="glyphicon glyphicon-remove"></span></a>
                     </div>
@@ -32,9 +32,9 @@
     </script>
     <!-- Test cases node template-->
     <script type="text/ng-template" id="test_cases_renderer.html">
-        <div ui-tree-handle class="tree-node-test-case">
+        <div class="tree-node-test-case">
             <div class="tree-node-content">
-                <a>{{node.title}}</a>
+                <a ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.title}}</a>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
             </div>
@@ -46,7 +46,7 @@
         <div ui-tree-handle class="tree-node">
             <div class="tree-node-content">
                 <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
-                <a>{{node.title}}</a>
+                <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
@@ -58,20 +58,36 @@
         </ol>
     </script>
 
-    <!-- Edit node dialog template -->
-    <script type="text/ng-template" id="nodeContent.html">
+    <!-- Edit node modal template -->
+    <script type="text/ng-template" id="editNodeModal.html">
         <div class="modal-header">
-            <h3 class="modal-title">{{editNodeTitle}}</h3>
+            <h3 class="modal-title">Edit Section</h3>
         </div>
         <div class="modal-body">
             <label for="inputTitle" class="control-label">Title</label>
             <div>
-                <input type="text" class="form-control" ng-model="editNodeTitle" id="inputEditNodeTitle" />
+                <input ng-required="true" type="text" class="form-control" ng-model="editNodeTitle" id="inputEditNodeTitle" />
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <!-- Detail node modal template -->
+    <script type="text/ng-template" id="nodeDetailModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Test Case Detail</h3>
+        </div>
+        <div class="modal-body">
+            <label for="inputTitle" class="control-label">Title</label>
+            <div>
+                {{detailNodeTitle}}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="close()">Close</button>
         </div>
     </script>
     <!-- Test Cases -->
@@ -84,12 +100,6 @@
                         <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer.html'"></li>
                     </ol>
                 </div>
-            </div>
-        </div>
-        <h3>Data binding</h3>
-        <div class="row">
-            <div class="col-sm-8">
-                <pre class="code">{{ tree | json }}</pre>
             </div>
         </div>
     </div>

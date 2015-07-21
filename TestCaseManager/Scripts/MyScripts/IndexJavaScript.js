@@ -34,8 +34,8 @@
             //new modal instance
             var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: 'nodeContent.html',
-                controller: 'ModalInstanceCtrl',
+                templateUrl: 'editNodeModal.html',
+                controller: 'EditNodeModalInstanceCtrl',
                 size: size,
                 resolve: {
                     title: function () {
@@ -48,6 +48,24 @@
                 $scope.editNodeData.title = editedNodeData;
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        //get tree node detail
+        $scope.nodeDetailData;
+        $scope.getNodeDetail = function (node, size) {
+            $scope.nodeDetailData = node.$modelValue;
+            //new modal instance
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'nodeDetailModal.html',
+                controller: 'DetailNodeModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    title: function () {
+                        return $scope.nodeDetailData.title;
+                    }
+                }
             });
         };
 
@@ -120,15 +138,29 @@
         }];
     });
 
-    //Modal Instance controller
-    indexApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, title) {
+    //Edit Node Modal Instance controller
+    indexApp.controller('EditNodeModalInstanceCtrl', function ($scope, $modalInstance, title) {
         $scope.editNodeTitle = title;
         $scope.ok = function () {
-            $modalInstance.close($scope.editNodeTitle);
+            if ($scope.editNodeTitle.length == 0) {
+
+            }
+            else {
+                $modalInstance.close($scope.editNodeTitle);
+            }
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
+        };
+        
+    });
+
+    //Detail Node Modal Instance controller
+    indexApp.controller('DetailNodeModalInstanceCtrl', function ($scope, $modalInstance, title) {
+        $scope.detailNodeTitle = title;
+        $scope.close = function () {
+            $modalInstance.close();
         };
     });
 })();
