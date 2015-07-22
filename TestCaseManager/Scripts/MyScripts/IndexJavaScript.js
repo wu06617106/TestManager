@@ -22,10 +22,13 @@
                     "title": "node",
                     "nodes": [],
                     "testcases": [],
-                    "type": "section",
+                    "type": { "id": "", "name": "" },
                     "priority": "",
                     "estimate": "",
-                    "references": ""
+                    "references": "",
+                    "preconditions": "",
+                    "steps": "",
+                    "expected_result": ""
                 });
             }
             else {
@@ -36,10 +39,13 @@
                     "title": "node",
                     "nodes": [],
                     "testcases": [],
-                    "type": "section",
+                    "type": { "id": "", "name": "" },
                     "priority": "",
                     "estimate": "",
-                    "references": ""
+                    "references": "",
+                    "preconditions": "",
+                    "steps": "",
+                    "expected_result": ""
                 });
             }
         };
@@ -56,14 +62,15 @@
                 controller: 'EditNodeModalInstanceCtrl',
                 size: size,
                 resolve: {
-                    title: function () {
-                        return $scope.editNodeData.title;
+                    detail: function () {
+                        return $scope.editNodeData;
                     }
                 }
             });
 
-            modalInstance.result.then(function (editedNodeData) {
-                $scope.editNodeData.title = editedNodeData;
+            modalInstance.result.then(function (result) {
+                $scope.editNodeData.title = result.title;
+                $scope.editNodeData.type = result.type
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
@@ -95,10 +102,13 @@
                 title: nodeData.title + '.' + (nodeData.nodes.length + 1),
                 nodes: [],
                 testcases: [],
-                type: "section",
+                type: { id: "", name: "" },
                 priority: "",
                 estimate: "",
-                references: ""
+                references: "",
+                preconditions: "",
+                steps: "",
+                expected_result: "",
             });
         };
 
@@ -111,7 +121,7 @@
                 nodeData.testcases.push({
                     id: nodeData.id * 10 + nodeData.testcases.length,
                     title: $scope.inputTestCase.title,
-                    type: "testcase"
+                    type: {id: "", name: ""}
                 });
                 $scope.closeInputArea(node);
             }
@@ -152,37 +162,49 @@
         //temp tree data
         $scope.tree = [{
             "id": 1,
-            "type": "section",
+            "type": { "id": "", "name": "" },
             "priority": "",
             "estimate": "",
             "references": "",
+            "preconditions": "",
+            "steps": "",
+            "expected_result": "",
             "title": "tree - item1",
             "nodes": [],
             "testcases": []
         }, {
             "id": 2,
-            "type": "section",
+            "type": { "id": "", "name": "" },
             "priority": "",
             "estimate": "",
             "references": "",
+            "preconditions": "",
+            "steps": "",
+            "expected_result": "",
             "title": "tree - item2",
             "nodes": [],
             "testcases": []
         }, {
             "id": 3,
-            "type": "section",
+            "type": { "id": "", "name": "" },
             "priority": "",
             "estimate": "",
             "references": "",
+            "preconditions": "",
+            "steps": "",
+            "expected_result": "",
             "title": "tree - item3",
             "nodes": [],
             "testcases": []
         }, {
             "id": 4,
-            "type": "section",
+            "type": { "id": "", "name": "" },
             "priority": "",
             "estimate": "",
             "references": "",
+            "preconditions": "",
+            "steps": "",
+            "expected_result": "",
             "title": "tree - item4",
             "nodes": [],
             "testcases": []
@@ -190,11 +212,56 @@
     });
 
     //Edit Node Modal Instance controller
-    indexApp.controller('EditNodeModalInstanceCtrl', function ($scope, $modalInstance, title) {
-        $scope.editNodeTitle = title;
+    indexApp.controller('EditNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
+        $scope.editNodeData = detail;
+        //temp types data
+        $scope.types = [{
+            "id": "0",
+            "name": "Acceptance"
+        }, {
+            "id": "1",
+            "name": "Accessibility"
+        }, {
+            "id": "2",
+            "name": "Automated"
+        }, {
+            "id": "3",
+            "name": "Compatibility"
+        }, {
+            "id": "4",
+            "name": "Destructive"
+        }, {
+            "id": "5",
+            "name": "Functional"
+        }, {
+            "id": "6",
+            "name": "Other"
+        }, {
+            "id": "7",
+            "name": "Performance"
+        }, {
+            "id": "8",
+            "name": "Regression"
+        }, {
+            "id": "9",
+            "name": "Security"
+        }, {
+            "id": "10",
+            "name": "Smoke & Sanity"
+        }, {
+            "id": "11",
+            "name": "Usability"
+        }];
+        if (detail.type.id != "") {
+            $scope.editNodeType = $scope.types[detail.type.id];
+        }
+        else {
+            $scope.editNodeType = $scope.types[0];
+        }
         $scope.ok = function () {
-            if ($scope.editNodeTitle.length != 0) {
-                $modalInstance.close($scope.editNodeTitle);
+            if ($scope.editNodeData.title.length != 0) {
+                $scope.editNodeData.type = $scope.editNodeType;
+                $modalInstance.close($scope.editNodeData);
             }
         };
 
