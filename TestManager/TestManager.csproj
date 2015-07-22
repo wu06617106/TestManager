@@ -236,6 +236,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\AngularLoadingBar\loading-bar.css" />
+    <Content Include="Scripts\AngularLoadingBar\loading-bar.js" />
     <Content Include="Scripts\AngularUITree\angular-ui-tree.js" />
     <Content Include="Scripts\AngularUITree\angular-ui-tree.min.js" />
     <Content Include="Scripts\angular.js" />
@@ -269,8 +271,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MyScripts\IndexJavaScript.js" />
-    <Content Include="Scripts\MyScripts\LoginJavaScript.js" />
+    <Content Include="app\Index\index.js" />
+    <Content Include="app\Login\login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

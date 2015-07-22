@@ -1,8 +1,11 @@
 ﻿(function () {
     'use strict';
+    
+    //controllers
+    var controllers = angular.module('controllers', []);
 
-    var indexApp = angular.module('treesApp', ['ui.tree', 'ui.bootstrap'])
-    .controller('treesCtrl', function ($scope, $modal, $log) {
+    //tree controller
+    controllers.controller('treesCtrl', function ($scope, $modal, $log) {
         //remove tree node
         $scope.remove = function (node) {
             node.remove();
@@ -59,7 +62,7 @@
             var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'editNodeModal.html',
-                controller: 'EditNodeModalInstanceCtrl',
+                controller: 'editNodeModalInstanceCtrl',
                 size: size,
                 resolve: {
                     detail: function () {
@@ -84,7 +87,7 @@
             var modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'nodeDetailModal.html',
-                controller: 'DetailNodeModalInstanceCtrl',
+                controller: 'detailNodeModalInstanceCtrl',
                 size: size,
                 resolve: {
                     detail: function () {
@@ -212,7 +215,15 @@
     });
 
     //Edit Node Modal Instance controller
-    indexApp.controller('EditNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
+    controllers.controller('detailNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
+        $scope.detailNode = detail
+        $scope.close = function () {
+            $modalInstance.close();
+        };
+    });
+
+    //Detail Node Modal Instance controller
+    controllers.controller('editNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
         $scope.editNodeData = detail;
         //temp types data
         $scope.types = [{
@@ -268,14 +279,8 @@
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-        
     });
 
-    //Detail Node Modal Instance controller
-    indexApp.controller('DetailNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
-        $scope.detailNode = detail
-        $scope.close = function () {
-            $modalInstance.close();
-        };
-    });
+    //module
+    var indexApp = angular.module('treesApp', ['ui.tree', 'ui.bootstrap', 'controllers'])
 })();
