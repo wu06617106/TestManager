@@ -60,11 +60,6 @@ namespace TestCaseManager.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != testCase.TestCaseId)
-            {
-                return BadRequest();
-            }
-
             db.Entry(testCase).State = EntityState.Modified;
 
             try
@@ -73,14 +68,7 @@ namespace TestCaseManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TestCaseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return StatusCode(HttpStatusCode.NoContent);
