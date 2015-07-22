@@ -10,7 +10,7 @@ namespace TestCaseManager.Controllers
     {
         public ActionResult Login()
         {
-            ViewBag.Title = "Log In Page";
+            ViewBag.Title = "Login Page";
 
             return View();
         }

@@ -55,7 +55,7 @@
                 <!-- edit section name area-->
                 <div class="form-group" ng-class="{'has-error' : !inputSection.title}">
                     <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                        <input type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title"/>
+                        <input type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title" value="node.title" />
                         <a class="btn btn-primary btn-xs" data-nodrag ng-click="editSectionTitle(node);" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
                         <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
                     </div>
@@ -80,9 +80,9 @@
                        tooltip="Please input the title!"
                        tooltip-placement="top"
                        tooltip-trigger="mouseenter"
-                       tooltip-enable="!editNodeData.title" />
+                       tooltip-enable="!editNodeData.title"/>
             </div>
-            <div class="form-group" >
+            <div class="form-group">
                 <div class="col-md-3">
                     <label>Type</label>
                     <select ng-model="editNodeType" ng-options="type.name for type in types"></select>
