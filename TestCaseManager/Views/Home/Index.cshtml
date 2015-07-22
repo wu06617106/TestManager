@@ -7,16 +7,18 @@
 <body ng-app="treesApp" ng-controller="treesCtrl">
     <!-- Test cases node template -->
     <script type="text/ng-template" id="nodes_renderer.html">
-        <div class="tree-node" data-type="testcases">
-            <div class="tree-node-content">
-                <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
-                <span style="margin-right: 8px;cursor:default" class="pull-right btn-primary btn-xs" data-nodrag ng-click="openInputTestCase(this)">Add Test Case</span>
-                <!--input test case section-->
-                <div class="form-group">
-                    <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                        <input required type="text" class="form-control" id="inputTitle" ng-model="inputTestCase.title" />
-                        <a class="btn btn-primary btn-xs" data-nodrag ng-click="newInutNameTestCase(this); closeInputTestCase(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
-                        <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputTestCase(this)"><span class="glyphicon glyphicon-remove"></span></a>
+        <div ui-tree-handle class="tree-node" data-type="section">
+            <div class="tree-node" data-type="testcases">
+                <div class="tree-node-content">
+                    <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
+                    <span style="margin-right: 8px;cursor:default" class="pull-right btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)">Add Test Case</span>
+                    <!--input new test case name area-->
+                    <div class="form-group" ng-class="{'has-error' : !inputTestCase.title}">
+                        <div id="inputTestCase" ng-show="isNodeSelected(this)">
+                            <input type="text" class="form-control" id="inputTestCaseTitle" ng-model="inputTestCase.title" />
+                            <a class="btn btn-primary btn-xs" data-nodrag ng-click="newTestCase(this);" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
+                            <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
     <script type="text/ng-template" id="test_cases_renderer.html">
         <div class="tree-node-test-case">
             <div class="tree-node-content">
-                <a ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.title}}</a>
+                <a data-nodrag ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.title}}</a>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
             </div>
@@ -49,7 +51,15 @@
                 <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
-                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                <!-- edit section name area-->
+                <div class="form-group" ng-class="{'has-error' : !inputSection.title}">
+                    <div id="inputTestCase" ng-show="isNodeSelected(this)">
+                        <input type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title"/>
+                        <a class="btn btn-primary btn-xs" data-nodrag ng-click="editSectionTitle(node);" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
+                        <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                </div>
             </div>
         </div>
         <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}" data-type="section">
@@ -61,7 +71,7 @@
     <!-- Edit node modal template -->
     <script type="text/ng-template" id="editNodeModal.html">
         <div class="modal-header">
-            <h3 class="modal-title">Edit Section</h3>
+            <h3 class="modal-title">Edit Test Cases</h3>
         </div>
         <div class="modal-body">
             <div class="form-group" ng-class="{'has-error' : !editNodeTitle}">
@@ -70,7 +80,7 @@
                        tooltip="Please input the title!"
                        tooltip-placement="top"
                        tooltip-trigger="mouseenter"
-                       tooltip-enable="!editNodeTitle" />
+                       tooltip-enable="!editNodeTitle"/>
             </div>
         </div>
         <div class="modal-footer">
@@ -82,12 +92,32 @@
     <!-- Detail node modal template -->
     <script type="text/ng-template" id="nodeDetailModal.html">
         <div class="modal-header">
-            <h3 class="modal-title">Test Case Detail</h3>
+            <h3 class="modal-title">{{detailNode.title}}</h3>
         </div>
         <div class="modal-body">
-            <label for="inputTitle" class="control-label">Title</label>
-            <div>
-                {{detailNodeTitle}}
+            <div class="col-md-push-2 form-group">
+                <h3 class="label label-default">Type</h3>
+                <div>
+                    {{detailNode.type}}
+                </div>
+            </div>
+            <div class="col-md-push-2 form-group">
+                <h3 class="label label-default">Priority</h3>
+                <div>
+                    {{detailNode.priority}}
+                </div>
+            </div>
+            <div class="col-md-pull-2 form-group">
+                <h3 class="label label-default">Estimate</h3>
+                <div>
+                    {{detailNode.estimate}}
+                </div>
+            </div>
+            <div class="col-md-pull-2 form-group">
+                <h3 class="label label-default">References</h3>
+                <div>
+                    {{detailNode.references}}
+                </div>
             </div>
         </div>
         <div class="modal-footer">
