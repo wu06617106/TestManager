@@ -79,14 +79,6 @@
                 testcases: []
             });
         };
-        //create new test case for current tree node
-        $scope.newTestCase = function (node) {
-            var nodeData = node.$modelValue;
-            nodeData.testcases.push({
-                id: nodeData.id * 10 + nodeData.testcases.length,
-                title: nodeData.title + '.' + (nodeData.testcases.length + 1),
-            });
-        };
 
         //create new input name test case for current tree node
         $scope.inputTestCase = {title:""};
@@ -112,6 +104,15 @@
         //close test case input
         $scope.closeInputTestCase = function (node) {
             $scope.selected = "";
+        };
+
+        // ui tree call back
+        $scope.options = {
+            accept: function (sourceNode, destNodes, destIndex) {
+                var sourceType = sourceNode.$element.attr('data-type');
+                var destType = destNodes.$element.attr('data-type');
+                return (sourceType == destType); // only accept the same type
+            }
         };
 
         //temp tree data
@@ -142,10 +143,7 @@
     indexApp.controller('EditNodeModalInstanceCtrl', function ($scope, $modalInstance, title) {
         $scope.editNodeTitle = title;
         $scope.ok = function () {
-            if ($scope.editNodeTitle.length == 0) {
-
-            }
-            else {
+            if ($scope.editNodeTitle.length != 0) {
                 $modalInstance.close($scope.editNodeTitle);
             }
         };
