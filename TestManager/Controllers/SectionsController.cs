@@ -33,7 +33,7 @@ namespace TestCaseManager.Controllers
             return Ok(section);
         }
 
-        [HttpPost]
+        [HttpPut]
         [ResponseType(typeof(Section))]
         public async Task<IHttpActionResult> EditSection(Section data)
         {
@@ -54,7 +54,6 @@ namespace TestCaseManager.Controllers
             }
             return Ok(data);
         }
-
 
         // GET: api/Sections
         public IQueryable<Section> GetSections()

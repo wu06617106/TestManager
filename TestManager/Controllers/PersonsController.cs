@@ -18,40 +18,45 @@ namespace TestCaseManager.Controllers
         private TestCaseManageModelContext db = new TestCaseManageModelContext();
 
         //for Log In
-        [HttpPost]
+        [HttpGet]
         [ResponseType(typeof(Person))]
-        public async Task<IHttpActionResult> LogIn(PersonDTO personData)
+        public async Task<IHttpActionResult> Login([FromUri] PersonDTO data)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var person = db.Persons.Where(p => p.Account == personData.Account && p.Password == personData.Password);
+            var person = db.Persons.Where(p => p.Account == data.Account && p.Password == data.Password);
 
             if (person == null)
             {
                 return NotFound();
             }
 
-            return Ok(person);
+            if(person.Count() == 0)
+                return NotFound();
+
+            return Ok(person.First());
         }
 
-        //for Register
+        [HttpPost]
+        [ResponseType(typeof(Person))]
         public async Task<IHttpActionResult> Register(Person person)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            var personList = db.Persons.Where(p => p.Account == person.Account && p.Password == person.Password);
+            if (personList.Count() > 0)
+                return BadRequest("Exist The Account");
             db.Persons.Add(person);
             await db.SaveChangesAsync();
 
             return Ok(person);
-            //return CreatedAtRoute("DefaultApi", new { id = person.PersonId }, person);
         }
 
-        [HttpPost]
+        [HttpPut]
         [ResponseType(typeof(Person))]
         public async Task<IHttpActionResult> EditPerson(Person data)
         {
@@ -95,6 +100,7 @@ namespace TestCaseManager.Controllers
 
 
         // DELETE: api/Persons/5
+        [HttpDelete]
         [ResponseType(typeof(Person))]
         public async Task<IHttpActionResult> DeletePerson(int id)
         {

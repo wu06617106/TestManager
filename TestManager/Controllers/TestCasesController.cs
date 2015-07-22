@@ -20,7 +20,7 @@ namespace TestCaseManager.Controllers
         // POST: api/TestCases
         [HttpPost]
         [ResponseType(typeof(TestCase))]
-        public async Task<IHttpActionResult> AddTestCase(TestCase testCase)
+        public async Task<IHttpActionResult> CreateTestCase(TestCase testCase)
         {
             if (!ModelState.IsValid)
             {
@@ -29,8 +29,6 @@ namespace TestCaseManager.Controllers
 
             db.TestCases.Add(testCase);
             await db.SaveChangesAsync();
-
-            //return CreatedAtRoute("DefaultApi", new { id = testCase.TestCaseId }, testCase);
             return Ok(testCase);
         }
 
@@ -50,13 +48,12 @@ namespace TestCaseManager.Controllers
             {
                 return NotFound();
             }
-
             return Ok(testCase);
         }
 
         // PUT: api/TestCases/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTestCase(int id, TestCase testCase)
+        public async Task<IHttpActionResult> PutTestCase(TestCase testCase)
         {
             if (!ModelState.IsValid)
             {
