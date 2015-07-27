@@ -5,6 +5,7 @@ namespace TestCaseManager.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("TestCase")]
     public partial class TestCase
@@ -28,13 +29,13 @@ namespace TestCaseManager.Models
         [StringLength(250)]
         public string References { get; set; }
 
-        [StringLength(250)]
+        [UIHint("tinymce_jquery_full"), AllowHtml]
         public string Preconditions { get; set; }
 
-        [StringLength(250)]
+        [UIHint("tinymce_jquery_full"), AllowHtml]
         public string Steps { get; set; }
 
-        [StringLength(250)]
+        [UIHint("tinymce_jquery_full"), AllowHtml]
         public string ExpectedResult { get; set; }
 
         public virtual Priority Priority { get; set; }

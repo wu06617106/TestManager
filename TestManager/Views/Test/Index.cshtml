@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TestCaseManager.Models.TestCase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority.PriorityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Section.SectionTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TestCaseTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estimate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.References)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preconditions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Steps)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedResult)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority.PriorityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Section.SectionTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type.TypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestCaseTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estimate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.References)
+        </td>
+        <td>
+            @Html.Raw(item.Preconditions)
+        </td>
+        <td>
+            @Html.Raw(item.Steps)
+        </td>
+        <td>
+            @Html.Raw(item.ExpectedResult)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TestCaseId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TestCaseId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TestCaseId })
+        </td>
+    </tr>
+}
+
+</table>

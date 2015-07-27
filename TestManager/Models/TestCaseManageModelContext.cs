@@ -12,6 +12,7 @@ namespace TestCaseManager.Models
         {
         }
 
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<Section> Sections { get; set; }

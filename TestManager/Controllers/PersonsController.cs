@@ -26,7 +26,7 @@ namespace TestCaseManager.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var person = db.Persons.Where(p => p.Account == data.Account && p.Password == data.Password);
+            var person = db.Persons.Where(p => p.Account == data.Account);
 
             if (person == null)
             {
@@ -34,7 +34,12 @@ namespace TestCaseManager.Controllers
             }
 
             if(person.Count() == 0)
-                return NotFound();
+                return BadRequest("Not Found the Account!");
+            else
+            {
+                if (person.First().Password != data.Password)
+                    return BadRequest("Error Password!");
+            }
 
             return Ok(person.First());
         }
@@ -47,7 +52,7 @@ namespace TestCaseManager.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var personList = db.Persons.Where(p => p.Account == person.Account && p.Password == person.Password);
+            var personList = db.Persons.Where(p => p.Account == person.Account);
             if (personList.Count() > 0)
                 return BadRequest("Exist The Account");
             db.Persons.Add(person);
