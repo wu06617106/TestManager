@@ -8,14 +8,16 @@
                 <div class="tree-node-content">
                     <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
                     <span style="margin-right: 8px;cursor:default" class="pull-right btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)">Add Test Case</span>
-                    <!--input new test case name area-->
-                    <div class="form-group" ng-class="{'has-error' : !inputTestCase.title}">
-                        <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                            <input type="text" class="form-control" id="inputTestCaseTitle" ng-model="inputTestCase.title" />
-                            <a class="btn btn-primary btn-xs" data-nodrag ng-click="newTestCase(this);" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
-                            <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                    <!--input new test case title area-->
+                    <form ng-submit="newTestCase(this)">
+                        <div class="form-group" ng-class="{'has-error' : !inputTestCase.title}">
+                            <div id="inputTestCase" ng-show="isNodeSelected(this)">
+                                <input ng-focus="isTestCaseInput.focus" ng-focus-lost="inputLostFocus()" type="text" class="form-control" id="inputTestCaseTitle" ng-model="inputTestCase.title" />
+                                <button class="btn btn-primary btn-xs" data-nodrag type="submit" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></button>
+                                <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

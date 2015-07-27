@@ -117,6 +117,7 @@
 
         //create new input name test case for current tree node
         $scope.inputTestCase = { title: "" };
+        $scope.isTestCaseInput = { focus: false };
         $scope.newTestCase = function (node) {
             if ($scope.inputTestCase.title.length != 0)
             {
@@ -126,7 +127,6 @@
                     title: $scope.inputTestCase.title,
                     type: {id: "", name: ""}
                 });
-                $scope.closeInputArea(node);
             }
         };
 
@@ -142,6 +142,7 @@
         //open test case input
         $scope.openInputArea = function (node) {
             $scope.selected = node;
+            $scope.isTestCaseInput.focus = true;
         };
 
         $scope.isNodeSelected = function (node) {
@@ -151,6 +152,11 @@
         //close test case input
         $scope.closeInputArea = function (node) {
             $scope.selected = "";
+        };
+
+        //test case input lost focus
+        $scope.inputLostFocus = function () {
+            $scope.isTestCaseInput.focus = false;
         };
 
         // ui tree call back
@@ -281,6 +287,25 @@
         };
     });
 
+    var directives = angular.module('directives', []);
+
+    directives.directive('ngFocus', function ($timeout) {
+        return {
+            link: function (scope, element, attrs) {
+                scope.$watch(attrs.ngFocus, function (val) {
+                    if (angular.isDefined(val) && val) {
+                        $timeout(function () { element[0].focus(); });
+                    }
+                }, true);
+                element.bind('blur', function () {
+                    if (angular.isDefined(attrs.ngFocusLost)) {
+                        scope.$apply(attrs.ngFocusLost);
+                    }
+                });
+            }
+        };
+    });
+
     //module
-    var indexApp = angular.module('treesApp', ['ui.tree', 'ui.bootstrap', 'controllers'])
+    var indexApp = angular.module('treesApp', ['ui.tree', 'ui.bootstrap', 'controllers', 'directives'])
 })();
