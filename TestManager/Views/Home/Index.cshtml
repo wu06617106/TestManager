@@ -51,13 +51,15 @@
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
                 <!-- edit section name area-->
-                <div class="form-group" ng-class="{'has-error' : !inputSection.title}">
-                    <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                        <input type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title" value="node.title" />
-                        <a class="btn btn-primary btn-xs" data-nodrag ng-click="editSectionTitle(node);" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></a>
-                        <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                <form ng-submit="editSectionTitle(node)">
+                    <div class="form-group" ng-class="{'has-error' : !inputSection.title}">
+                        <div id="inputTestCase" ng-show="isNodeSelected(this)">
+                            <input ng-focus="isSectionInput.focus" ng-focus-lost="inputLostFocus()" type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title" value="node.title" />
+                            <button  type="submit" class="btn btn-primary btn-xs" data-nodrag ng-click="" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></button>
+                            <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}" data-type="section">

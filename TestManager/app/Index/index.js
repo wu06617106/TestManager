@@ -118,6 +118,7 @@
         //create new input name test case for current tree node
         $scope.inputTestCase = { title: "" };
         $scope.isTestCaseInput = { focus: false };
+        $scope.isSectionInput = { focus: false };
         $scope.newTestCase = function (node) {
             if ($scope.inputTestCase.title.length != 0)
             {
@@ -142,6 +143,7 @@
         //open test case input
         $scope.openInputArea = function (node) {
             $scope.selected = node;
+            $scope.isSectionInput.focus = true;
             $scope.isTestCaseInput.focus = true;
         };
 
@@ -156,6 +158,7 @@
 
         //test case input lost focus
         $scope.inputLostFocus = function () {
+            $scope.isSectionInput.focus = false;
             $scope.isTestCaseInput.focus = false;
         };
 
