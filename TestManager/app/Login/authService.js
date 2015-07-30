@@ -1,5 +1,6 @@
 ﻿'use strict';
-app.factory('authService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
+var authService = angular.module('authService', []);
+authService.factory('authService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
     var serviceBase = 'http://localhost:4789/api/';
     var authServiceFactory = {};

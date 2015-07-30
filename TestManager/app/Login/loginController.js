@@ -1,5 +1,6 @@
 ﻿'use strict';
-app.controller("LoginController", ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
+var loginControllers = angular.module('loginControllers', []);
+loginControllers.controller('loginController', ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
     $scope.loginData = {
         account: "",
         password: ""

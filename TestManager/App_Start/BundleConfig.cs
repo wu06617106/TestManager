@@ -29,14 +29,24 @@ namespace TestCaseManager
 
             bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
                         "~/Scripts/angular.js",
-                        "~/Scripts/angular-route.min.js"));
+                        "~/Scripts/angular-route.min.js",
+                        "~/Scripts/loading-bar.min.js",
+                        "~/Scripts/angular-local-storage.min.js",
+                        "~/Scripts/AngularUITree/angular-ui-tree.min.js",
+                        "~/Scripts/AngularLoadingBar/loading-bar.min.js",
+                        "~/app/test-manager-app.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angularJSLayout").Include(
-                        "~/app/Layout/inital.js",
-                        "~/app/Layout/angular-local-storage.min.js",
-                        "~/app/Layout/authInterceptorService.js",
-                        "~/app/Layout/loading-bar.min.js",
-                        "~/app/Layout/authService.js"));
+            bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
+                        "~/app/TestCaseTree/testCaseTreeController.js",
+                        "~/app/Login/loginController.js",
+                        "~/app/Layout/layoutController.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/directives").Include(
+                        "~/app/TestCaseTree/testCaseTreeDirectives.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/services").Include(
+                        "~/app/Login/authInterceptorService.js",
+                        "~/app/Login/authService.js"));
 
         }
     }

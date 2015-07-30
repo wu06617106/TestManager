@@ -12,19 +12,10 @@ namespace TestCaseManager.Controllers
         {
             ViewBag.Title = "Login Page";
 
-            return View();
+            return PartialView("Login");
         }
 
         //Controller
-
-        public ActionResult SPApage1()
-
-        {
-
-            return PartialView("Login");
-
-        }
-
 
         public ActionResult Index()
         {

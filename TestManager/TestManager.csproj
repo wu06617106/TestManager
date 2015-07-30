@@ -225,12 +225,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\Layout\angular-local-storage.min.js" />
-    <Content Include="app\Layout\authInterceptorService.js" />
-    <Content Include="app\Layout\authService.js" />
-    <Content Include="app\Layout\inital.js" />
-    <Content Include="app\Layout\layout.js" />
-    <Content Include="app\Layout\loading-bar.min.js" />
+    <Content Include="app\Login\login.html" />
+    <Content Include="app\TestCaseTree\testCaseTree.html" />
+    <Content Include="app\TestCaseTree\testCaseTreeDirectives.js" />
+    <Content Include="Scripts\angular-local-storage.min.js" />
+    <Content Include="app\Login\authInterceptorService.js" />
+    <Content Include="app\Login\authService.js" />
+    <Content Include="app\Layout\layoutController.js" />
+    <Content Include="Scripts\AngularLoadingBar\loading-bar.min.js" />
+    <Content Include="app\test-manager-app.js" />
     <Content Include="App_Data\TestCaseManageDatabase.mdf" />
     <Content Include="App_Data\TestCaseManageDatabase_log.ldf">
       <DependentUpon>TestCaseManageDatabase.mdf</DependentUpon>
@@ -246,7 +249,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\AngularLoadingBar\loading-bar.css" />
     <Content Include="Scripts\AngularLoadingBar\loading-bar.js" />
     <Content Include="Scripts\AngularUITree\angular-ui-tree.js" />
     <Content Include="Scripts\AngularUITree\angular-ui-tree.min.js" />
@@ -281,8 +283,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="app\Index\index.js" />
-    <Content Include="app\Login\login.js" />
+    <Content Include="app\TestCaseTree\testCaseTreeController.js" />
+    <Content Include="app\Login\loginController.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -554,13 +556,11 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\TestSection.cshtml" />
-    <Content Include="Views\Home\TestTestCase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Views\Test\Create.cshtml" />
     <Content Include="Views\Test\Delete.cshtml" />

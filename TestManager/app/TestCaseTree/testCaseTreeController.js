@@ -1,11 +1,10 @@
-﻿(function () {
-    'use strict';
+﻿    'use strict';
     
     //controllers
-    var controllers = angular.module('controllers', []);
-
+    var testCaseTreeControllers = angular.module('testCaseTreeControllers', ['ui.tree']);
+    
     //tree controller
-    controllers.controller('treesCtrl', function ($scope, $modal, $log) {
+    testCaseTreeControllers.controller('testCaseTreeController', function ($scope, $modal, $log) {
         //remove tree node
         $scope.remove = function (node) {
             node.remove();
@@ -225,7 +224,7 @@
     });
 
     //Edit Node Modal Instance controller
-    controllers.controller('detailNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
+    testCaseTreeControllers.controller('detailNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
         $scope.detailNode = detail
         $scope.close = function () {
             $modalInstance.close();
@@ -233,7 +232,7 @@
     });
 
     //Detail Node Modal Instance controller
-    controllers.controller('editNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
+    testCaseTreeControllers.controller('editNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {
         $scope.editNodeData = detail;
         //temp types data
         $scope.types = [{
@@ -291,25 +290,3 @@
         };
     });
 
-    var directives = angular.module('directives', []);
-
-    directives.directive('ngFocus', function ($timeout) {
-        return {
-            link: function (scope, element, attrs) {
-                scope.$watch(attrs.ngFocus, function (val) {
-                    if (angular.isDefined(val) && val) {
-                        $timeout(function () { element[0].focus(); });
-                    }
-                }, true);
-                element.bind('blur', function () {
-                    if (angular.isDefined(attrs.ngFocusLost)) {
-                        scope.$apply(attrs.ngFocusLost);
-                    }
-                });
-            }
-        };
-    });
-
-    //module
-    var indexApp = angular.module('treesApp', ['ui.tree', 'ui.bootstrap', 'controllers', 'directives'])
-})();
