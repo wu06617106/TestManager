@@ -1,43 +1,35 @@
-﻿var personModule = angular.module("PersonModule", []);
-personModule.controller("PersonCtrl", function ($scope, $http) {
-    $scope.account;
-    $scope.password;
-    $scope.person;
-    $scope.registerAccount;
-    $scope.registerPassword;
-    $scope.registerName;
+﻿'use strict';
+app.controller("LoginController", ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
+    $scope.loginData = {
+        account: "",
+        password: ""
+    };
     $scope.successMsgVisible = { 'visibility': 'hidden' };
     $scope.errorMsgVisible = { 'visibility': 'hidden' };
-    $scope.submit = function () {
-        var personData =
-            {
-                Account: $scope.account,
-                Password: $scope.password
-            }
-        $http.post("/api/Persons/LogIn", personData).success(function (data, status, headers, config) {
-            $scope.person = data[0];
-            $scope.successMsgVisible = { 'visibility': 'visible' };
-            $scope.errorMsgVisible = { 'visibility': 'hidden' };
-        }).error(function (data, status, headers, config) {
-            $scope.errorMsgVisible = { 'visibility': 'visible' };
-            $scope.successMsgVisible = { 'visibility': 'hidden' };
-        });
-    }
 
-    $scope.regigster = function () {
-        var personData =
-            {
-                Account: $scope.RegisterAccount,
-                Password: $scope.RegisterPassword,
-                PersonName: $scope.RegisterName
-            }
-        $http.post("/api/Persons/Register", personData).success(function (data, status, headers, config) {
-            $scope.person = data;
+    $scope.person;
+    $scope.message = "";
+
+    $scope.login = function () {
+
+        authService.login($scope.loginData).then(function (response) {
+
+            $scope.person = response;
+            //$timeout(function () {
+            //    $location.path('/Home/Index');
+            //    $scope.$apply();
+            //})
+            //var url = $location.path('/Home/Index');
+            //location.assign('/Home/Index');
+            //$location.path('/Home');
             $scope.successMsgVisible = { 'visibility': 'visible' };
             $scope.errorMsgVisible = { 'visibility': 'hidden' };
-        }).error(function (data, status, headers, config) {
-            $scope.errorMsgVisible = { 'visibility': 'visible' };
-            $scope.successMsgVisible = { 'visibility': 'hidden' };
-        });
-    }
-})
+
+        },
+         function (err) {
+             $scope.message = err.error_description;
+             $scope.errorMsgVisible = { 'visibility': 'visible' };
+             $scope.successMsgVisible = { 'visibility': 'hidden' };
+         });
+    };
+}]);

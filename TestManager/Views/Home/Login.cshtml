@@ -7,7 +7,7 @@
     <h1>Login</h1>
 </div>
 <div class="row">
-    <div ng-app="PersonModule" ng-controller="PersonCtrl">
+    <div ng-controller="LoginController">
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -40,7 +40,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" ng-submit="regigster()">
                         <div class="form-group">
-                            <label  class="col-sm-3 control-label">Account</label>
+                            <label class="col-sm-3 control-label">Account</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="registerAccount" ng-model="registerAccount" />
                             </div>

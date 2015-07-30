@@ -1,17 +1,61 @@
 ﻿<!DOCTYPE html>
-<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html data-ng-app="AngularAuthApp">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angularJS")
+    @Scripts.Render("~/bundles/angularJSLayout")
+    <script src="~/app/Layout/layout.js"></script>
+    @*<script src="~/app/Login/login.js"></script>*@
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="layoutController">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <a class="navbar-brand" href="#/">Home</a>
+            </div>
+            <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div data-ng-view="">
+        </div>
+    </div>
+    <hr />
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted">Taiseer Joudeh Blog: <a target="_blank" href="http://bitoftech.net">bitoftech.net</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer></footer>
+    </div>
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,10 +77,10 @@
         @RenderBody()
         <hr />
         <footer>
-            
+
         </footer>
-    </div>  
-    @Scripts.Render("~/bundles/angularJS")
+    </div>*@
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

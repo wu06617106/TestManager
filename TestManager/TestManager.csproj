@@ -225,6 +225,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Layout\angular-local-storage.min.js" />
+    <Content Include="app\Layout\authInterceptorService.js" />
+    <Content Include="app\Layout\authService.js" />
+    <Content Include="app\Layout\inital.js" />
+    <Content Include="app\Layout\layout.js" />
+    <Content Include="app\Layout\loading-bar.min.js" />
     <Content Include="App_Data\TestCaseManageDatabase.mdf" />
     <Content Include="App_Data\TestCaseManageDatabase_log.ldf">
       <DependentUpon>TestCaseManageDatabase.mdf</DependentUpon>
@@ -233,6 +239,7 @@
     <Content Include="Content\angular-ui-tree.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading-bar.css" />
     <Content Include="Content\tree.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -543,7 +550,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

@@ -23,11 +23,21 @@ namespace TestCaseManager
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/tree.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/loading-bar.css",
                       "~/Content/angular-ui-tree.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
                         "~/Scripts/angular.js",
                         "~/Scripts/angular-route.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularJSLayout").Include(
+                        "~/app/Layout/inital.js",
+                        "~/app/Layout/angular-local-storage.min.js",
+                        "~/app/Layout/authInterceptorService.js",
+                        "~/app/Layout/loading-bar.min.js",
+                        "~/app/Layout/authService.js"));
+
         }
     }
 }
