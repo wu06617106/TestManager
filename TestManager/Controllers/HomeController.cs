@@ -40,9 +40,6 @@ namespace TestCaseManager.Controllers
             return PartialView("_Register");
         }
 
-        
-
-
 
         public ActionResult TestSection()
         {

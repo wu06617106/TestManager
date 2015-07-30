@@ -38,21 +38,16 @@ namespace TestCaseManager
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
                         "~/app/TestCaseTree/testCaseTreeController.js",
-                        "~/app/Login/loginController.js",
+                        "~/app/Account/loginController.js",
+                        "~/app/Account/registerController.js",
                         "~/app/Layout/layoutController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/directives").Include(
                         "~/app/TestCaseTree/testCaseTreeDirectives.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/services").Include(
-                        "~/app/Login/authInterceptorService.js",
-                        "~/app/Login/authService.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/angularJSApp").Include(
-                        "~/app/Account/register.js",
-                        "~/app/Account/login.js"));
-
-
+                        "~/app/Account/authInterceptorService.js",
+                        "~/app/Account/authService.js"));
         }
     }
 }

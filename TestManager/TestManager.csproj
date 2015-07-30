@@ -225,12 +225,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\Login\login.html" />
+    <Content Include="app\Account\registerController.js" />
     <Content Include="app\TestCaseTree\testCaseTree.html" />
     <Content Include="app\TestCaseTree\testCaseTreeDirectives.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
-    <Content Include="app\Login\authInterceptorService.js" />
-    <Content Include="app\Login\authService.js" />
+    <Content Include="app\Account\authInterceptorService.js" />
+    <Content Include="app\Account\authService.js" />
     <Content Include="app\Layout\layoutController.js" />
     <Content Include="Scripts\AngularLoadingBar\loading-bar.min.js" />
     <Content Include="app\test-manager-app.js" />
@@ -284,7 +284,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="app\TestCaseTree\testCaseTreeController.js" />
-    <Content Include="app\Login\loginController.js" />
+    <Content Include="app\Account\loginController.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -567,6 +567,11 @@
     <Content Include="Views\Test\Details.cshtml" />
     <Content Include="Views\Test\Edit.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Home\_Index.cshtml" />
+    <Content Include="Views\Home\_Login.cshtml" />
+    <Content Include="Views\Home\_Register.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,18 +1,22 @@
 ﻿'use strict';
-app.controller("LoginController", ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
-    $scope.loginData = {
-        account: "",
-        password: ""
+var registerControllers = angular.module('registerControllers', []);
+registerControllers.controller('RegisterController', ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
+    $scope.registerData = {
+        Account: "",
+        Password: "",
+        PersonName: ""
     };
     $scope.successMsgVisible = { 'visibility': 'hidden' };
     $scope.errorMsgVisible = { 'visibility': 'hidden' };
     $scope.errorMessage = "";
 
-    $scope.login = function () {
-        authService.login($scope.loginData).then(function (response) {
+    $scope.register = function () {
+        authService.saveRegistration($scope.registerData).then(function (response) {
+
             //$location.path('/Home');
             $scope.successMsgVisible = { 'visibility': 'visible' };
             $scope.errorMsgVisible = { 'visibility': 'hidden' };
+
         },
          function (err) {
              $scope.errorMessage = err.Message;
