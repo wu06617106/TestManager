@@ -12,7 +12,7 @@
     @Scripts.Render("~/bundles/angularJS")
     @Scripts.Render("~/bundles/angularJSLayout")
     <script src="~/app/Layout/layout.js"></script>
-    @*<script src="~/app/Login/login.js"></script>*@
+    @Scripts.Render("~/bundles/angularJSApp")
 </head>
 
 <body>
@@ -26,25 +26,11 @@
             </div>
             <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                 <ul class="nav navbar-nav navbar-right">
-                    <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="" >Welcome {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="" data-ng-click="logIn()">Log In</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="" data-ng-click="register()">Register</a></li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div data-ng-view="">
-        </div>
-    </div>
-    <hr />
-    <div id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="text-muted">Taiseer Joudeh Blog: <a target="_blank" href="http://bitoftech.net">bitoftech.net</a></p>
-                </div>
             </div>
         </div>
     </div>
@@ -54,32 +40,6 @@
             <hr />
             <footer></footer>
     </div>
-
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Test Manager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-
-        </footer>
-    </div>*@
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

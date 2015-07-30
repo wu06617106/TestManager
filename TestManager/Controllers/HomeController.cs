@@ -8,30 +8,41 @@ namespace TestCaseManager.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Login()
-        {
-            ViewBag.Title = "Login Page";
-
-            return View();
-        }
-
-        //Controller
-
-        public ActionResult SPApage1()
-
-        {
-
-            return PartialView("Login");
-
-        }
-
-
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
 
             return View();
         }
+
+        public ActionResult _Index()
+        {
+            return PartialView("_Index");
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+        //Controller
+        public ActionResult _Login()
+        {
+            return PartialView("_Login");
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        //Controller
+        public ActionResult _Register()
+        {
+            return PartialView("_Register");
+        }
+
+        
+
+
 
         public ActionResult TestSection()
         {

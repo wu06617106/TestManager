@@ -4,9 +4,16 @@ app.controller('layoutController', ['$scope', '$location', 'authService', functi
 
     $scope.logOut = function () {
         authService.logOut();
-        //$location.path('/home');
-        location.assign('/Home/Login');
+        $location.path('/Home/Login');
     }
+
+    $scope.logIn = function () {
+        $location.path('/Home/Login');
+    }
+
+    $scope.register = function () {
+        $location.path('/Home/Register');
+    }
+
     $scope.authentication = authService.authentication;
-    //$scope.person = authService.person;
 }]);

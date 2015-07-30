@@ -2,27 +2,22 @@
 
 app.config(function ($routeProvider) {
 
-    $routeProvider.when("/home", {
+    $routeProvider.when("/Home/Index", {
         controller: "LoginController",
-        templateUrl: "/Home/Login"
+        templateUrl: "/Home/_index"
     });
 
-//    //$routeProvider.when("/login", {
-//    //    controller: "loginController",
-//    //    templateUrl: "/app/views/login.html"
-//    //});
+    $routeProvider.when("/Home/Login", {
+        controller: "LoginController",
+        templateUrl: "/Home/_login"
+    });
 
-//    //$routeProvider.when("/signup", {
-//    //    controller: "signupController",
-//    //    templateUrl: "/app/views/signup.html"
-//    //});
+    $routeProvider.when("/Home/Register", {
+        controller: "RegisterController",
+        templateUrl: "/Home/_register"
+    });
 
-//    //$routeProvider.when("/orders", {
-//    //    controller: "ordersController",
-//    //    templateUrl: "/app/views/orders.html"
-//    //});
-
-    $routeProvider.otherwise({ redirectTo: "/home" });
+    $routeProvider.otherwise({ redirectTo: "/Home/Login" });
 });
 
 
