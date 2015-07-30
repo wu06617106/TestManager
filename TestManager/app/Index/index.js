@@ -128,6 +128,7 @@
                     title: $scope.inputTestCase.title,
                     type: {id: "", name: ""}
                 });
+                $scope.inputTestCase.title = "";
             }
         };
 
