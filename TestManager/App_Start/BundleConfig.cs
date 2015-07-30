@@ -48,6 +48,11 @@ namespace TestCaseManager
                         "~/app/Login/authInterceptorService.js",
                         "~/app/Login/authService.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angularJSApp").Include(
+                        "~/app/Account/register.js",
+                        "~/app/Account/login.js"));
+
+
         }
     }
 }

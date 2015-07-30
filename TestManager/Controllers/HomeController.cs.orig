@@ -12,6 +12,14 @@ namespace TestCaseManager.Controllers
         {
             ViewBag.Title = "Home Page";
 
+<<<<<<< HEAD
+            return PartialView("Login");
+        }
+
+        //Controller
+
+        public ActionResult Index()
+=======
             return View();
         }
 
@@ -21,6 +29,7 @@ namespace TestCaseManager.Controllers
         }
 
         public ActionResult Login()
+>>>>>>> 3ef8b96287b9fc7016482ca41031835040dfc866
         {
             return View();
         }
