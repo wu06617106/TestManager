@@ -14,18 +14,10 @@ loginControllers.controller('loginController', ['$scope', '$location', 'authServ
     $scope.login = function () {
 
         authService.login($scope.loginData).then(function (response) {
-
             $scope.person = response;
-            //$timeout(function () {
-            //    $location.path('/Home/Index');
-            //    $scope.$apply();
-            //})
-            //var url = $location.path('/Home/Index');
-            //location.assign('/Home/Index');
-            //$location.path('/Home');
+            $location.path('/Home/Index');
             $scope.successMsgVisible = { 'visibility': 'visible' };
             $scope.errorMsgVisible = { 'visibility': 'hidden' };
-
         },
          function (err) {
              $scope.message = err.error_description;

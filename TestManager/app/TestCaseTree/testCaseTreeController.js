@@ -4,7 +4,7 @@
     var testCaseTreeControllers = angular.module('testCaseTreeControllers', ['ui.tree']);
     
     //tree controller
-    testCaseTreeControllers.controller('testCaseTreeController', function ($scope, $modal, $log) {
+    testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', function ($scope, $modal, $log, testCaseTreeService) {
         //remove tree node
         $scope.remove = function (node) {
             node.remove();
@@ -15,8 +15,15 @@
             node.toggle();
         };
 
-        //create new tree
+        $scope.sectionData = {data:'data'};
+        //create new node
         $scope.insertNewNode = function () {
+            testCaseTreeService.getSection().then(function (response) {
+                $scope.sectionData.data = response[0].SectionId;
+            },
+             function (err) {
+
+             });
             var length = $scope.tree.length;
             if (length == 0) {
                 $scope.tree.push({
@@ -221,7 +228,7 @@
             "nodes": [],
             "testcases": []
         }];
-    });
+    }]);
 
     //Edit Node Modal Instance controller
     testCaseTreeControllers.controller('detailNodeModalInstanceCtrl', function ($scope, $modalInstance, detail) {

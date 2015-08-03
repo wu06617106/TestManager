@@ -1,10 +1,10 @@
 ﻿'use strict';
 var controllers = angular.module('controllers', ['layoutControllers', 'testCaseTreeControllers', 'loginControllers', 'registerControllers', 'layoutControllers']);
-var services = angular.module('services', ['authInterceptorService', 'authService']);
+var services = angular.module('services', ['authInterceptorService', 'authService', 'testCaseTreeService']);
 var directives = angular.module('directives', ['testCaseTreeDirectives']);
 var testManagerApp = angular.module('testManagerApp', ['ngRoute', 'angular-loading-bar', 'LocalStorageModule', 'ui.bootstrap', 'controllers', 'services', 'directives']);
 
-testManagerApp.config(function ($routeProvider) {
+testManagerApp.config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider.when("/Home/Index", {
         controller: "loginController",
@@ -21,8 +21,16 @@ testManagerApp.config(function ($routeProvider) {
         templateUrl: "/Home/_Register"
     });
 
+    $routeProvider.when("/Test/Index", {
+        templateUrl: "/Test/Index"
+    });
+
+    $routeProvider.when("/Test/Edit", {
+        templateUrl: "/Test/Edit"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/Home/Login" });
-});
+}]);
 
 
 testManagerApp.run(['authService', function (authService) {

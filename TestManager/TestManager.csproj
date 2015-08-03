@@ -226,8 +226,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Account\registerController.js" />
-    <Content Include="app\TestCaseTree\testCaseTree.html" />
     <Content Include="app\TestCaseTree\testCaseTreeDirectives.js" />
+    <Content Include="app\TestCaseTree\testCaseTreeService.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
     <Content Include="app\Account\authInterceptorService.js" />
     <Content Include="app\Account\authService.js" />

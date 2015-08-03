@@ -1,6 +1,6 @@
 ﻿'use strict';
 var registerControllers = angular.module('registerControllers', []);
-registerControllers.controller('RegisterController', ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
+registerControllers.controller('registerController', ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
     $scope.registerData = {
         Account: "",
         Password: "",

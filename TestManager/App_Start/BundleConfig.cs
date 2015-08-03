@@ -9,12 +9,15 @@ namespace TestCaseManager
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.min.js"));
 
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
             // 準備好實際執行時，請使用 http://modernizr.com 上的建置工具，只選擇您需要的測試。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.validate.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/ui-bootstrap-tpls-{version}.js"));
@@ -28,7 +31,7 @@ namespace TestCaseManager
                       "~/Content/angular-ui-tree.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
-                        "~/Scripts/angular.js",
+                        "~/Scripts/angular.min.js",
                         "~/Scripts/angular-route.min.js",
                         "~/Scripts/loading-bar.min.js",
                         "~/Scripts/angular-local-storage.min.js",
@@ -47,7 +50,8 @@ namespace TestCaseManager
 
             bundles.Add(new ScriptBundle("~/bundles/services").Include(
                         "~/app/Account/authInterceptorService.js",
-                        "~/app/Account/authService.js"));
+                        "~/app/Account/authService.js",
+                        "~/app/TestCaseTree/testCaseTreeService.js"));
         }
     }
 }
