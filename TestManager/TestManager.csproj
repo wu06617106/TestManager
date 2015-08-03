@@ -203,6 +203,7 @@
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\TestCasesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -159,7 +159,7 @@
     <div class="col-sm-4 container">
         <div class="row">
             <div>
-                <h3>123 {{sectionData.data}}<a class="pull-right btn btn-primary btn-xs" ng-click="insertNewNode()" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a></h3>
+                <h3>Sections<a class="pull-right btn btn-primary btn-xs" ng-click="insertNewNode()" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a></h3>
                 <div ui-tree="options" id="tree-root">
                     <ol ui-tree-nodes ng-model="tree" data-type="section">
                         <li ng-repeat="node in tree" ui-tree-node ng-include="'simple_nodes_renderer.html'" data-type="section"></li>
