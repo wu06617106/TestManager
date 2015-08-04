@@ -17,7 +17,7 @@ namespace TestCaseManager.Controllers
     {
         private TestCaseManageModelContext db = new TestCaseManageModelContext();
 
-        //for CreateSetcion
+        //for CreateSection
         [HttpPost]
         [ResponseType(typeof(Section))]
         public async Task<IHttpActionResult> CreateSection(Section section)

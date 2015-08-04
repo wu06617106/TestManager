@@ -9,10 +9,6 @@ namespace TestCaseManager.Models
     [Table("Type")]
     public partial class Type
     {
-        public Type()
-        {
-            TestCases = new HashSet<TestCase>();
-        }
 
         public int TypeId { get; set; }
 
@@ -20,6 +16,5 @@ namespace TestCaseManager.Models
         [StringLength(30)]
         public string TypeName { get; set; }
 
-        public virtual ICollection<TestCase> TestCases { get; set; }
     }
 }

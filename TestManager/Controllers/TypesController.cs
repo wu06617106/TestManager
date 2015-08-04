@@ -20,6 +20,7 @@ namespace TestCaseManager.Controllers
         // GET: api/Types
         public IQueryable<TestCaseManager.Models.Type> GetTypes()
         {
+            
             return db.Types;
         }
 

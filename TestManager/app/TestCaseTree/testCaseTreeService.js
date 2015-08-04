@@ -6,12 +6,13 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     var serviceBase = 'http://localhost:4789/api/';
     var testCaseTreeFactory = {};
 
-    var _sectionData = {};
-    
-    var _getSection = function () {
+    var _sectionsData = {};
+    var _typesData = {};
+
+    var _getSections = function () {
         var deferred = $q.defer();
         $http.get(serviceBase + 'Sections/GetSections').success(function (response) {
-            _sectionData = response;
+            _sectionsData = response;
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
@@ -19,6 +20,17 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
-    testCaseTreeFactory.getSection = _getSection;
+    var _getTypes = function () {
+        var deferred = $q.defer();
+        $http.get(serviceBase + 'Types/GetTypes').success(function (response) {
+            _typesData = response;
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
+    testCaseTreeFactory.getSections = _getSections;
     return testCaseTreeFactory;
 }]);

@@ -5,6 +5,9 @@
     
     //tree controller
     testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', function ($scope, $modal, $log, testCaseTreeService) {
+
+        $scope.sectionsData;
+
         //remove tree node
         $scope.remove = function (node) {
             node.remove();
@@ -15,15 +18,17 @@
             node.toggle();
         };
 
-        $scope.sectionData = {data:'data'};
+        $scope.init = function () {
+            testCaseTreeService.getSections().then(function (response) {
+                $scope.sectionsData = response[0].SectionTitle;
+            },
+            function (err) {
+
+            });
+        };
+
         //create new node
         $scope.insertNewNode = function () {
-            testCaseTreeService.getSection().then(function (response) {
-                $scope.sectionData.data = response[0].SectionId;
-            },
-             function (err) {
-
-             });
             var length = $scope.tree.length;
             if (length == 0) {
                 $scope.tree.push({
