@@ -1,6 +1,6 @@
 ﻿
 
-<div ng-controller="testCaseTreeController" >
+<div ng-controller="testCaseTreeController" ng-init="init()">
     <!-- Test cases node template -->
     <script type="text/ng-template" id="nodes_renderer.html">
         <div ui-tree-handle class="tree-node" data-type="testcases">
@@ -168,10 +168,10 @@
             </div>
         </div>
     </div>
-    <div class="container" ng-init="init()">
+    <div class="container">
         <div>
             <div>
-                <p>{{sectionsData}}</p>
+                <p>{{sectionsData[0].SectionTitle}}</p>
             </div>
         </div>
     </div>

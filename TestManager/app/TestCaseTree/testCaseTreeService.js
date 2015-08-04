@@ -32,5 +32,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     };
 
     testCaseTreeFactory.getSections = _getSections;
+    testCaseTreeFactory.getTypes = _getTypes;
     return testCaseTreeFactory;
 }]);

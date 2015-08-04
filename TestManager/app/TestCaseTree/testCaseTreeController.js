@@ -6,7 +6,9 @@
     //tree controller
     testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', function ($scope, $modal, $log, testCaseTreeService) {
 
-        $scope.sectionsData;
+        $scope.sectionsData = [];
+        //temp tree data
+        $scope.tree = [];
 
         //remove tree node
         $scope.remove = function (node) {
@@ -20,11 +22,30 @@
 
         $scope.init = function () {
             testCaseTreeService.getSections().then(function (response) {
-                $scope.sectionsData = response[0].SectionTitle;
+                $scope.sectionsData = response;
+                initData();
             },
             function (err) {
-
             });
+        };
+
+        var initData = function () {
+            var i
+            for (i = 0; i < $scope.sectionsData.length; i++) {
+                $scope.tree.push({
+                    "id": $scope.sectionsData[i].SectionId,
+                    "title": $scope.sectionsData[i].SectionTitle,
+                    "nodes": $scope.sectionsData[i].ChildSectionIdList,
+                    "testcases": [],
+                    "type": { "id": "", "name": "" },
+                    "priority": "",
+                    "estimate": "",
+                    "references": "",
+                    "preconditions": "",
+                    "steps": "",
+                    "expected_result": ""
+                });
+            }
         };
 
         //create new node
@@ -182,57 +203,6 @@
                 return (sourceType == destType); // only accept the same type
             }
         };
-
-        //temp tree data
-        $scope.tree = [{
-            "id": 1,
-            "type": { "id": "", "name": "" },
-            "priority": "",
-            "estimate": "",
-            "references": "",
-            "preconditions": "",
-            "steps": "",
-            "expected_result": "",
-            "title": "tree - item1",
-            "nodes": [],
-            "testcases": []
-        }, {
-            "id": 2,
-            "type": { "id": "", "name": "" },
-            "priority": "",
-            "estimate": "",
-            "references": "",
-            "preconditions": "",
-            "steps": "",
-            "expected_result": "",
-            "title": "tree - item2",
-            "nodes": [],
-            "testcases": []
-        }, {
-            "id": 3,
-            "type": { "id": "", "name": "" },
-            "priority": "",
-            "estimate": "",
-            "references": "",
-            "preconditions": "",
-            "steps": "",
-            "expected_result": "",
-            "title": "tree - item3",
-            "nodes": [],
-            "testcases": []
-        }, {
-            "id": 4,
-            "type": { "id": "", "name": "" },
-            "priority": "",
-            "estimate": "",
-            "references": "",
-            "preconditions": "",
-            "steps": "",
-            "expected_result": "",
-            "title": "tree - item4",
-            "nodes": [],
-            "testcases": []
-        }];
     }]);
 
     //Edit Node Modal Instance controller
