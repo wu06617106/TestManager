@@ -7,7 +7,7 @@
     testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', function ($scope, $modal, $log, testCaseTreeService) {
 
         $scope.sectionsData = [];
-        //temp tree data
+        $scope.testCases = [];
         $scope.tree = [];
 
         //remove tree node
@@ -21,30 +21,60 @@
         };
 
         $scope.init = function () {
-            testCaseTreeService.getSections().then(function (response) {
-                $scope.sectionsData = response;
-                initData();
+            testCaseTreeService.getTestCases().then(function (response) {
+                $scope.testCases = response;
+                testCaseTreeService.getSections().then(function (response) {
+                    $scope.sectionsData = response;
+                    initSectionData();
+                },
+                function (err) {
+                });
             },
             function (err) {
             });
         };
 
-        var initData = function () {
-            var i
+        var initTestCasesData = function (nodeObj) {
+            var i;
+            for (i = 0; i < $scope.testCases.length; i++) {
+                if (nodeObj.node.id == $scope.testCases[i].SectionId) {
+                    var testCase = {
+                        "id": $scope.testCases[i].TestCaseId,
+                        "title": $scope.testCases[i].TestCaseTitle,
+                        "nodes": [],
+                        "testcases": [],
+                        "type": { "id": "", "name": "" },
+                        "priority": "",
+                        "estimate": $scope.testCases[i].Estimate,
+                        "references": $scope.testCases[i].References,
+                        "preconditions": $scope.testCases[i].Preconditions,
+                        "steps": "",
+                        "expected_result": ""
+                    };
+                    nodeObj.node.testcases.push(testCase);
+                }
+            }
+        };
+
+        var initSectionData = function () {
+            var i;
             for (i = 0; i < $scope.sectionsData.length; i++) {
-                $scope.tree.push({
-                    "id": $scope.sectionsData[i].SectionId,
-                    "title": $scope.sectionsData[i].SectionTitle,
-                    "nodes": $scope.sectionsData[i].ChildSectionIdList,
-                    "testcases": [],
-                    "type": { "id": "", "name": "" },
-                    "priority": "",
-                    "estimate": "",
-                    "references": "",
-                    "preconditions": "",
-                    "steps": "",
-                    "expected_result": ""
-                });
+                var obj = { node: {}};
+                obj.node = {
+                     "id": $scope.sectionsData[i].SectionId,
+                     "title": $scope.sectionsData[i].SectionTitle,
+                     "nodes": [],
+                     "testcases": [],
+                     "type": { "id": "", "name": "" },
+                     "priority": "",
+                     "estimate": "",
+                     "references": "",
+                     "preconditions": "",
+                     "steps": "",
+                     "expected_result": ""
+                 };
+                initTestCasesData(obj);
+                $scope.tree.push(obj.node);  
             }
         };
 

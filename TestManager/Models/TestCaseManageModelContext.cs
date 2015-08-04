@@ -26,11 +26,6 @@ namespace TestCaseManager.Models
                 .WithRequired(e => e.Priority)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Section>()
-                .HasMany(e => e.TestCases)
-                .WithRequired(e => e.Section)
-                .WillCascadeOnDelete(false);
-
         }
     }
 }

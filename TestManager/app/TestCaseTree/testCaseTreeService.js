@@ -8,6 +8,7 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
 
     var _sectionsData = {};
     var _typesData = {};
+    var _testCasesData = {};
 
     var _getSections = function () {
         var deferred = $q.defer();
@@ -31,7 +32,19 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
+    var _getTestCases = function () {
+        var deferred = $q.defer();
+        $http.get(serviceBase + 'TestCases/GetTestCases').success(function (response) {
+            _testCasesData = response;
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
     testCaseTreeFactory.getSections = _getSections;
     testCaseTreeFactory.getTypes = _getTypes;
+    testCaseTreeFactory.getTestCases = _getTestCases;
     return testCaseTreeFactory;
 }]);
