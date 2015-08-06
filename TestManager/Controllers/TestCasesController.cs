@@ -74,7 +74,6 @@ namespace TestCaseManager.Controllers
             testDTO.Steps = testCase.Steps;
             testDTO.ExpectedResult = testCase.ExpectedResult;
             return Ok(testDTO);
-            return Ok(testCase);
         }
 
         // PUT: api/TestCases/5

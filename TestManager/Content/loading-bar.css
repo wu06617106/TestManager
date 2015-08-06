@@ -67,10 +67,10 @@
 }
 
 #loading-bar-spinner .spinner-icon {
-  width: 14px;
-  height: 14px;
+  width: 25px;
+  height: 25px;
 
-  border:  solid 2px transparent;
+  border:  solid 4px transparent;
   border-top-color:  #29d;
   border-left-color: #29d;
   border-radius: 50%;

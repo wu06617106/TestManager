@@ -1,12 +1,12 @@
 ﻿
 
-<div ng-controller="testCaseTreeController" ng-init="init()">
+<div ng-init="init()">
     <!-- Test cases node template -->
     <script type="text/ng-template" id="nodes_renderer.html">
         <div ui-tree-handle class="tree-node" data-type="testcases">
             <div class="tree-node" data-type="testcases">
                 <div class="tree-node-content">
-                    <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
+                    <span style="color:black;cursor:default" class="text-info">{{node.SectionTitle}}</span>
                     <span style="margin-right: 8px;cursor:default" class="pull-right btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)">Add Test Case</span>
                     <!--input new test case title area-->
                     <form ng-submit="newTestCase(this)">
@@ -46,7 +46,7 @@
         <div ui-tree-handle class="tree-node" data-type="section">
             <div class="tree-node-content">
                 <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
-                <span style="color:black;cursor:default" class="text-info">{{node.title}}</span>
+                <span style="color:black;cursor:default" class="text-info">{{node.SectionTitle}}</span>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>

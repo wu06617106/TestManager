@@ -6,14 +6,9 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     var serviceBase = 'http://localhost:4789/api/';
     var testCaseTreeFactory = {};
 
-    var _sectionsData;
-    var _typesData;
-    var _testCasesData;
-
     var _getSections = function () {
         var deferred = $q.defer();
         $http.get(serviceBase + 'Sections/GetSections').success(function (response) {
-            _sectionsData = response;
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
@@ -24,7 +19,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     var _getTypes = function () {
         var deferred = $q.defer();
         $http.get(serviceBase + 'Types/GetTypes').success(function (response) {
-            _typesData = response;
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
@@ -35,7 +29,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     var _getTestCases = function () {
         var deferred = $q.defer();
         $http.get(serviceBase + 'TestCases/GetTestCases').success(function (response) {
-            _testCasesData = response;
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
@@ -46,7 +39,16 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     var _createSection = function (section) {
         var deferred = $q.defer();
         $http.post(serviceBase + 'Sections/CreateSection', section).success(function (response) {
-            _sectionsData.push(section);
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
+    var _editSection = function (section) {
+        var deferred = $q.defer();
+        $http.put(serviceBase + 'Sections/EditSectionChild' + '?id=' + section.SectionId + '&childIdString=' + section.ChildSectionIdList).success(function (response) {
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
@@ -58,5 +60,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     testCaseTreeFactory.getTypes = _getTypes;
     testCaseTreeFactory.getTestCases = _getTestCases;
     testCaseTreeFactory.createSection = _createSection;
+    testCaseTreeFactory.editSection = _editSection;
     return testCaseTreeFactory;
 }]);

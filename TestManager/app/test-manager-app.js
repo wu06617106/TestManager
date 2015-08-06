@@ -32,11 +32,9 @@ testManagerApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: "/Home/Login" });
 }]);
 
-
 testManagerApp.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
-
 
 testManagerApp.config(function ($httpProvider, $locationProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
