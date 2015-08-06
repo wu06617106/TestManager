@@ -1,6 +1,6 @@
 ﻿'use strict';
 var loginControllers = angular.module('loginControllers', []);
-loginControllers.controller('loginController', ['$scope', '$location', 'authService', '$timeout', function ($scope, $location, authService, $timeout) {
+loginControllers.controller('loginController', ['$scope', '$location', 'authService', '$timeout', 'localStorageService', function ($scope, $location, authService, $timeout, localStorageService) {
     $scope.loginData = {
         account: "",
         password: ""
@@ -25,4 +25,13 @@ loginControllers.controller('loginController', ['$scope', '$location', 'authServ
              $scope.successMsgVisible = { 'visibility': 'hidden' };
          });
     };
+
+    $scope.load = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $location.path('/Home/Index');
+        } else {
+            $location.path('/Home/Login"');
+        }
+    }
 }]);

@@ -52,6 +52,7 @@ namespace TestCaseManager
                         "~/app/Account/authInterceptorService.js",
                         "~/app/Account/authService.js",
                         "~/app/TestCaseTree/testCaseTreeService.js"));
+
         }
     }
 }
