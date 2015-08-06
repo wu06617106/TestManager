@@ -34,6 +34,7 @@
             });
         };
 
+        //initail TestCases
         var initTestCasesData = function (nodeObj) {
             var i;
             for (i = 0; i < $scope.testCases.length; i++) {
@@ -56,6 +57,7 @@
             }
         };
 
+        // initial Sections
         var initSectionData = function () {
             var i;
             for (i = 0; i < $scope.sectionsData.length; i++) {
@@ -162,7 +164,7 @@
         //create new sub node for current tree node
         $scope.newSubItem = function (node) {
             var nodeData = node.$modelValue;
-            nodeData.nodes.push({
+            var node = {
                 id: nodeData.id * 10 + nodeData.nodes.length,
                 title: nodeData.title + '.' + (nodeData.nodes.length + 1),
                 nodes: [],
@@ -174,7 +176,15 @@
                 preconditions: "",
                 steps: "",
                 expected_result: "",
-            });
+            };
+            nodeData.nodes.push(node);
+            //testCaseTreeService.createSection(node).then(function (response) {
+            //    $scope.sectionsData = response;
+            //    initSectionData();
+                
+            //},
+            //function (err) {
+            //});
         };
 
         //create new input name test case for current tree node

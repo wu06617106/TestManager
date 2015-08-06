@@ -32,8 +32,8 @@ namespace TestCaseManager.Controllers
             return Ok(testCase);
         }
 
-
         // GET: api/TestCases
+        [ResponseType(typeof(TestCase))]
         public IQueryable<TestCase> GetTestCases()
         {
             return db.TestCases;

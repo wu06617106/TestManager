@@ -7,7 +7,7 @@ var testManagerApp = angular.module('testManagerApp', ['ngRoute', 'angular-loadi
 testManagerApp.config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider.when("/Home/Index", {
-        controller: "loginController",
+        controller: "testCaseTreeController",
         templateUrl: "/Home/_Index"
     });
 
