@@ -234,7 +234,7 @@
                 var destType = destNodes.$element.attr('data-type');
                 return (sourceType == destType); // only accept the same type
             }
-        };
+        };    
     }]);
 
     //Edit Node Modal Instance controller
@@ -302,5 +302,6 @@
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-    });
+    }   
+ );
 

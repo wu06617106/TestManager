@@ -228,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Account\registerController.js" />
+    <Content Include="app\initController.js" />
     <Content Include="app\TestCaseTree\testCaseTreeDirectives.js" />
     <Content Include="app\TestCaseTree\testCaseTreeService.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
