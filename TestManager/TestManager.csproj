@@ -218,6 +218,7 @@
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\TestCase.cs" />
+    <Compile Include="Models\TestCaseDTO.cs" />
     <Compile Include="Models\TestCaseManageModelContext.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

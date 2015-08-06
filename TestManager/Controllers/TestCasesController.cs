@@ -33,14 +33,28 @@ namespace TestCaseManager.Controllers
         }
 
         // GET: api/TestCases
-        [ResponseType(typeof(TestCase))]
-        public IQueryable<TestCase> GetTestCases()
+        [ResponseType(typeof(TestCaseDTO))]
+        public IQueryable<TestCaseDTO> GetTestCases()
         {
-            return db.TestCases;
+            var testCasesDtos = from t in db.TestCases
+                                select new TestCaseDTO()
+                                {
+                                    TestCaseId = t.TestCaseId,
+                                    TestCaseTitle = t.TestCaseTitle,
+                                    SectionId = t.SectionId,
+                                    TypeId = t.TypeId,
+                                    PriorityId = t.PriorityId,
+                                    Estimate = t.Estimate,
+                                    References = t.References,
+                                    Preconditions = t.Preconditions,
+                                    Steps = t.Steps,
+                                    ExpectedResult = t.ExpectedResult
+                                };
+            return testCasesDtos;
         }
 
         // GET: api/TestCases/5
-        [ResponseType(typeof(TestCase))]
+        [ResponseType(typeof(TestCaseDTO))]
         public async Task<IHttpActionResult> GetTestCase(int id)
         {
             TestCase testCase = await db.TestCases.FindAsync(id);
@@ -48,6 +62,18 @@ namespace TestCaseManager.Controllers
             {
                 return NotFound();
             }
+            TestCaseDTO testDTO = new TestCaseDTO();
+            testDTO.TestCaseId = testCase.TestCaseId;
+            testDTO.TestCaseTitle = testCase.TestCaseTitle;
+            testDTO.SectionId = testCase.SectionId;
+            testDTO.TypeId = testCase.TypeId;
+            testDTO.PriorityId = testCase.PriorityId;
+            testDTO.Estimate = testCase.Estimate;
+            testDTO.References = testCase.References;
+            testDTO.Preconditions = testCase.Preconditions;
+            testDTO.Steps = testCase.Steps;
+            testDTO.ExpectedResult = testCase.ExpectedResult;
+            return Ok(testDTO);
             return Ok(testCase);
         }
 

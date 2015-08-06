@@ -21,13 +21,13 @@ testManagerApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: "/Home/_Register"
     });
 
-    $routeProvider.when("/Test/Index", {
-        templateUrl: "/Test/Index"
-    });
+    //$routeProvider.when("/Test/Index", {
+    //    templateUrl: "/Test/Index"
+    //});
 
-    $routeProvider.when("/Test/Edit", {
-        templateUrl: "/Test/Edit"
-    });
+    //$routeProvider.when("/Test/Edit", {
+    //    templateUrl: "/Test/Edit"
+    //});
 
     $routeProvider.otherwise({ redirectTo: "/Home/Login" });
 }]);
