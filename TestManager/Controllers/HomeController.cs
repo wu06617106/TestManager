@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TestCaseManager.Models;
 
 namespace TestCaseManager.Controllers
 {
     public class HomeController : Controller
     {
+        private TestCaseManageModelContext db = new TestCaseManageModelContext();
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -40,19 +43,29 @@ namespace TestCaseManager.Controllers
             return PartialView("_Register");
         }
 
-
-        public ActionResult TestSection()
+        public ActionResult EditTestCase(int? id)
         {
-            ViewBag.Title = "Test Section Page";
+            ViewBag.Title = "Edit Test Case";
 
             return View();
         }
 
-        public ActionResult TestTestCase()
+        public ActionResult _EditTestCase(int? id)
         {
-            ViewBag.Title = "Test TestCase Page";
-
-            return View();
+            ViewBag.Title = "Edit Test Case";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TestCase testCase = db.TestCases.Find(id);
+            if (testCase == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PriorityId = new SelectList(db.Priorities, "PriorityId", "PriorityName", testCase.PriorityId);
+            ViewBag.SectionId = new SelectList(db.Sections, "SectionId", "SectionTitle", testCase.SectionId);
+            ViewBag.TypeId = new SelectList(db.Types, "TypeId", "TypeName", testCase.TypeId);
+            return PartialView("_EditTestCase", testCase);
         }
     }
 }

@@ -10,6 +10,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angularJS")
+    @Scripts.Render("~/bundles/services")
+    @Scripts.Render("~/bundles/controllers")
+    @Scripts.Render("~/bundles/directives")
+    <script src="@Url.Content("~/Scripts/tinymce/jquery.tinymce.js")" type="text/javascript"></script>
     
 </head>
 
@@ -40,10 +45,6 @@
         <hr />
         <footer></footer>
     </div>
-    @Scripts.Render("~/bundles/angularJS")
-    @Scripts.Render("~/bundles/services")
-    @Scripts.Render("~/bundles/controllers")
-    @Scripts.Render("~/bundles/directives")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

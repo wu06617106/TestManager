@@ -4,7 +4,7 @@
     var testCaseTreeControllers = angular.module('testCaseTreeControllers', ['ui.tree']);
     
     //tree controller
-    testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', function ($scope, $modal, $log, testCaseTreeService) {
+    testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', '$location', function ($scope, $modal, $log, testCaseTreeService, $location) {
 
         $scope.sectionsData = [];
         $scope.testCases = [];
@@ -136,25 +136,26 @@
         $scope.animationsEnabled = true;
         $scope.editNode = function (node, size) {
             $scope.editNodeData = node.$modelValue;
+            $location.path('/Home/EditTestCase/' + $scope.editNodeData.TestCaseId);
             //new modal instance
-            var modalInstance = $modal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'editNodeModal.html',
-                controller: 'editNodeModalInstanceCtrl',
-                size: size,
-                resolve: {
-                    detail: function () {
-                        return $scope.editNodeData;
-                    }
-                }
-            });
+            //var modalInstance = $modal.open({
+            //    animation: $scope.animationsEnabled,
+            //    templateUrl: 'editNodeModal.html',
+            //    controller: 'editNodeModalInstanceCtrl',
+            //    size: size,
+            //    resolve: {
+            //        detail: function () {
+            //            return $scope.editNodeData;
+            //        }
+            //    }
+            //});
 
-            modalInstance.result.then(function (result) {
-                $scope.editNodeData.TestCaseTitle = result.TestCaseTitle;
-                $scope.editNodeData.TypeId = result.TypeId
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
+            //modalInstance.result.then(function (result) {
+            //    $scope.editNodeData.TestCaseTitle = result.TestCaseTitle;
+            //    $scope.editNodeData.TypeId = result.TypeId
+            //}, function () {
+            //    $log.info('Modal dismissed at: ' + new Date());
+            //});
         };
 
         //get test case's detail

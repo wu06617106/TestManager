@@ -576,6 +576,8 @@
     <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\EditTestCase.cshtml" />
+    <Content Include="Views\Home\_EditTestCase.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
