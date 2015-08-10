@@ -10,14 +10,13 @@
         $scope.testCases = [];
         $scope.tree = [];
 
-        //remove tree node
+        //remove section
         $scope.removeSection = function (node) {
             testCaseTreeService.removeSection(node.$modelValue).then(function (response) {
                 node.remove();
             },
             function (err) {
             });
-            //node.remove();
         };
 
         //remove test case
@@ -27,7 +26,6 @@
             },
             function (err) {
             });
-
         };
 
         //toggle tree node
@@ -49,23 +47,22 @@
             });
         };
 
-        //initail TestCases
+        //initial TestCases
         var initTestCasesData = function (nodeObj) {
             var i;
             for (i = 0; i < $scope.testCases.length; i++) {
                 if (nodeObj.node.SectionId == $scope.testCases[i].SectionId) {
                     var testCase = {
-                        "id": $scope.testCases[i].TestCaseId,
-                        "title": $scope.testCases[i].TestCaseTitle,
-                        "nodes": [],
-                        "testcases": [],
-                        "type": { "id": "", "name": "" },
-                        "priority": "",
-                        "estimate": $scope.testCases[i].Estimate,
-                        "references": $scope.testCases[i].References,
-                        "preconditions": $scope.testCases[i].Preconditions,
-                        "steps": "",
-                        "expected_result": ""
+                        "TestCaseId": $scope.testCases[i].TestCaseId,
+                        "TestCaseTitle": $scope.testCases[i].TestCaseTitle,
+                        "SectionId": $scope.testCases[i].SectionId,
+                        "TypeId": $scope.testCases[i].TypeId,
+                        "PriorityId": $scope.testCases[i].PriorityId,
+                        "Estimate": $scope.testCases[i].Estimate,
+                        "References": $scope.testCases[i].References,
+                        "Preconditions": $scope.testCases[i].Preconditions,
+                        "Steps": $scope.testCases[i].Steps,
+                        "ExpectedResult": $scope.testCases[i].ExpectedResult
                     };
                     nodeObj.node.testcases.push(testCase);
                 }
@@ -74,7 +71,6 @@
 
         // initial Sections
         var initSectionData = function () {
-            var subNodes;
             var i, j;
             for (i = 0; i < $scope.sectionsData.length; i++) {
                 var obj = createNodeObj(i);
@@ -85,7 +81,9 @@
                     for (j = 1; j < splittedNodes.length; j++) {
                         var index = findSectionIndex(splittedNodes[j]);
                         obj.node.nodes.push(createNodeObj(index).node);
-                        $scope.sectionsData.splice(index, 1);
+                        if ($scope.sectionsData[index].ChildSectionIdList != "") {
+                            $scope.sectionsData.splice(index, 1);
+                        }
                     }
                 }
                 initTestCasesData(obj);
@@ -152,8 +150,8 @@
             });
 
             modalInstance.result.then(function (result) {
-                $scope.editNodeData.title = result.title;
-                $scope.editNodeData.type = result.type
+                $scope.editNodeData.TestCaseTitle = result.TestCaseTitle;
+                $scope.editNodeData.TypeId = result.TypeId
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
@@ -184,6 +182,7 @@
                 "SectionTitle":nodeData.SectionTitle + '.' + (nodeData.nodes.length + 1),
                 "SectionDescription": "",
                 "ChildSectionIdList": "",
+                "ParentId": nodeData.SectionId,
                 "nodes": [],
                 "testcases": []
             };
@@ -216,10 +215,21 @@
             if ($scope.inputTestCase.title.length != 0)
             {
                 var nodeData = node.$modelValue;
-                nodeData.testcases.push({
-                    id: nodeData.id * 10 + nodeData.testcases.length,
-                    title: $scope.inputTestCase.title,
-                    type: {id: "", name: ""}
+                var testCase = {
+                    "TestCaseTitle": $scope.inputTestCase.title,
+                    "SectionId": nodeData.SectionId,
+                    "TypeId": 1,
+                    "PriorityId": 1,
+                    "Estimate": "None",
+                    "References": "None",
+                    "Preconditions": "None",
+                    "Steps": "None",
+                    "ExpectedResult": "None"
+                };
+                testCaseTreeService.createTestCase(testCase).then(function (createResponse) {
+                    nodeData.testcases.push(createResponse);
+                },
+                function (err) {
                 });
                 $scope.inputTestCase.title = "";
             }
@@ -315,15 +325,9 @@
             "id": "11",
             "name": "Usability"
         }];
-        if (detail.type.id != "") {
-            $scope.editNodeType = $scope.types[detail.type.id];
-        }
-        else {
-            $scope.editNodeType = $scope.types[0];
-        }
+
         $scope.ok = function () {
             if ($scope.editNodeData.title.length != 0) {
-                $scope.editNodeData.type = $scope.editNodeType;
                 $modalInstance.close($scope.editNodeData);
             }
         };

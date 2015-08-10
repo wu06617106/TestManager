@@ -34,7 +34,7 @@
     <script type="text/ng-template" id="test_cases_renderer.html">
         <div class="tree-node-test-case">
             <div class="tree-node-content">
-                <a data-nodrag ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.title}}</a>
+                <a data-nodrag ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.TestCaseTitle}}</a>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeTestCase(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
             </div>
@@ -110,31 +110,31 @@
     <!-- Detail node modal template -->
     <script type="text/ng-template" id="nodeDetailModal.html">
         <div class="modal-header">
-            <h3 class="modal-title">{{detailNode.title}}</h3>
+            <h3 class="modal-title">{{detailNode.TestCaseTitle}}</h3>
         </div>
         <div class="modal-body">
             <div class="col-md-push-2 form-group">
                 <h3 class="label label-default">Type</h3>
                 <div>
-                    {{detailNode.type.name}}
+                    {{detailNode.TypeId}}
                 </div>
             </div>
             <div class="col-md-push-2 form-group">
                 <h3 class="label label-default">Priority</h3>
                 <div>
-                    {{detailNode.priority}}
+                    {{detailNode.PriorityId}}
                 </div>
             </div>
             <div class="col-md-pull-2 form-group">
                 <h3 class="label label-default">Estimate</h3>
                 <div>
-                    {{detailNode.estimate}}
+                    {{detailNode.Estimate}}
                 </div>
             </div>
             <div class="col-md-pull-2 form-group">
                 <h3 class="label label-default">References</h3>
                 <div>
-                    {{detailNode.references}}
+                    {{detailNode.References}}
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
     <div class="container">
         <div>
             <div>
-                {{tree}}
+                
             </div>
         </div>
     </div>
