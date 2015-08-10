@@ -66,11 +66,22 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
+    var _editSectionTitle = function (id, title) {
+        var deferred = $q.defer();
+        $http.put(serviceBase + 'Sections/EditSectionTitle' + '?id=' + id + '&sectionTitle=' + title).success(function (response) {
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
     testCaseTreeFactory.getSections = _getSections;
     testCaseTreeFactory.getTypes = _getTypes;
     testCaseTreeFactory.getTestCases = _getTestCases;
     testCaseTreeFactory.createSection = _createSection;
     testCaseTreeFactory.editSection = _editSection;
+    testCaseTreeFactory.editSectionTitle = _editSectionTitle;
     testCaseTreeFactory.removeTestCase = _removeTestCase;
     return testCaseTreeFactory;
 }]);

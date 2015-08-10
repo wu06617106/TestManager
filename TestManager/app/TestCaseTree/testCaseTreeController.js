@@ -224,8 +224,12 @@
         $scope.inputSection = { title: "" };
         $scope.editSectionTitle = function (node) {
             if ($scope.inputSection.title.length != 0) {
-                node.title = $scope.inputSection.title;
-                $scope.closeInputArea();
+                testCaseTreeService.editSectionTitle(node.SectionId, $scope.inputSection.title).then(function (response) {
+                    node.title = response.SectionTitle;
+                    $scope.closeInputArea();
+                },
+                function (err) {
+                });
             }
         };
 
