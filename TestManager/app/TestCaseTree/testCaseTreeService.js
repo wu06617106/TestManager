@@ -46,6 +46,16 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
+    var _removeTestCase = function (node) {
+        var deferred = $q.defer();
+        $http.delete(serviceBase + 'TestCases/DeleteTestCase/' + node.id).success(function (response) {
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
     var _editSection = function (section) {
         var deferred = $q.defer();
         $http.put(serviceBase + 'Sections/EditSectionChild' + '?id=' + section.SectionId + '&childIdString=' + section.ChildSectionIdList).success(function (response) {
@@ -61,5 +71,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     testCaseTreeFactory.getTestCases = _getTestCases;
     testCaseTreeFactory.createSection = _createSection;
     testCaseTreeFactory.editSection = _editSection;
+    testCaseTreeFactory.removeTestCase = _removeTestCase;
     return testCaseTreeFactory;
 }]);

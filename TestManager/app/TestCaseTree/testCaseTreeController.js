@@ -15,6 +15,16 @@
             node.remove();
         };
 
+        //remove test case
+        $scope.removeTestCase = function (node) {
+            testCaseTreeService.removeTestCase(node.$modelValue).then(function (response) {
+                node.remove();
+            },
+            function (err) {
+            });
+
+        };
+
         //toggle tree node
         $scope.toggle = function (node) {
             node.toggle();
