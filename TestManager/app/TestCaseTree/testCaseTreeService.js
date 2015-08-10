@@ -51,10 +51,16 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
+<<<<<<< HEAD
+    var _removeSection = function (node) {
+        var deferred = $q.defer();
+        $http.delete(serviceBase + 'Sections/DeleteSectionTree/' + node.id).success(function (response) {
+=======
     //Create test case
     var _createTestCase = function (testCase) {
         var deferred = $q.defer();
         $http.post(serviceBase + 'TestCases/CreateTestCase', testCase).success(function (response) {
+>>>>>>> 2d9b43f75dead656324af90e4af4df20b2281c58
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
@@ -62,8 +68,12 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
+<<<<<<< HEAD
+    var _removeTestCase = function (node) {
+=======
     //Remove test case
     var _removeTestCase = function (testCase) {
+>>>>>>> 2d9b43f75dead656324af90e4af4df20b2281c58
         var deferred = $q.defer();
         $http.delete(serviceBase + 'TestCases/DeleteTestCase/' + testCase.id).success(function (response) {
             deferred.resolve(response);
@@ -103,5 +113,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     testCaseTreeFactory.editSection = _editSection;
     testCaseTreeFactory.editSectionTitle = _editSectionTitle;
     testCaseTreeFactory.removeTestCase = _removeTestCase;
+    testCaseTreeFactory.removeSection = _removeSection;
     return testCaseTreeFactory;
 }]);

@@ -11,8 +11,13 @@
         $scope.tree = [];
 
         //remove tree node
-        $scope.remove = function (node) {
-            node.remove();
+        $scope.removeSection = function (node) {
+            testCaseTreeService.removeSection(node.$modelValue).then(function (response) {
+                node.remove();
+            },
+            function (err) {
+            });
+            //node.remove();
         };
 
         //remove test case
