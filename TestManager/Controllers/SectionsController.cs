@@ -58,37 +58,6 @@ namespace TestCaseManager.Controllers
 
         [HttpPut]
         [ResponseType(typeof(Section))]
-        public async Task<IHttpActionResult> EditSectionTitle([FromUri]int id, [FromUri] string sectionTitle)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var section = await db.Sections.FindAsync(id);
-
-            if (section == null)
-            {
-                return NotFound();
-            }
-
-            section.SectionTitle = sectionTitle;
-
-            db.Entry(section).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return NotFound();
-            }
-            return Ok(section);
-        }
-
-        [HttpPut]
-        [ResponseType(typeof(Section))]
         public async Task<IHttpActionResult> EditSectionChild([FromUri]int id,[FromUri] string childIdString)
         {
             if (!ModelState.IsValid)

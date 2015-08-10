@@ -55,16 +55,17 @@
             for (i = 0; i < $scope.testCases.length; i++) {
                 if (nodeObj.node.SectionId == $scope.testCases[i].SectionId) {
                     var testCase = {
-                        "TestCaseId": $scope.testCases[i].TestCaseId,
-                        "TestCaseTitle": $scope.testCases[i].TestCaseTitle,
-                        "SectionId": $scope.testCases[i].SectionId,
-                        "TypeId": $scope.testCases[i].TypeId,
-                        "PriorityId": $scope.testCases[i].PriorityId,
-                        "Estimate": $scope.testCases[i].Estimate,
-                        "References": $scope.testCases[i].References,
-                        "Preconditions": $scope.testCases[i].Preconditions,
-                        "Steps": $scope.testCases[i].Steps,
-                        "ExpectedResult": $scope.testCases[i].ExpectedResult
+                        "id": $scope.testCases[i].TestCaseId,
+                        "title": $scope.testCases[i].TestCaseTitle,
+                        "nodes": [],
+                        "testcases": [],
+                        "type": { "id": "", "name": "" },
+                        "priority": "",
+                        "estimate": $scope.testCases[i].Estimate,
+                        "references": $scope.testCases[i].References,
+                        "preconditions": $scope.testCases[i].Preconditions,
+                        "steps": "",
+                        "expected_result": ""
                     };
                     nodeObj.node.testcases.push(testCase);
                 }
@@ -215,21 +216,10 @@
             if ($scope.inputTestCase.title.length != 0)
             {
                 var nodeData = node.$modelValue;
-                var testCase = {
-                    "TestCaseTitle": $scope.inputTestCase.title,
-                    "SectionId": nodeData.SectionId,
-                    "TypeId": 1,
-                    "PriorityId": 1,
-                    "Estimate": "",
-                    "References": "",
-                    "Preconditions": "",
-                    "Steps": "",
-                    "ExpectedResult": ""
-                };
-                testCaseTreeService.createTestCase(testCase).then(function (createResponse) {
-                    nodeData.testcases.push(createResponse);
-                },
-                function (err) {
+                nodeData.testcases.push({
+                    id: nodeData.id * 10 + nodeData.testcases.length,
+                    title: $scope.inputTestCase.title,
+                    type: {id: "", name: ""}
                 });
                 $scope.inputTestCase.title = "";
             }
@@ -239,12 +229,8 @@
         $scope.inputSection = { title: "" };
         $scope.editSectionTitle = function (node) {
             if ($scope.inputSection.title.length != 0) {
-                testCaseTreeService.editSectionTitle(node.SectionId, $scope.inputSection.title).then(function (response) {
-                    node.title = response.SectionTitle;
-                    $scope.closeInputArea();
-                },
-                function (err) {
-                });
+                node.title = $scope.inputSection.title;
+                $scope.closeInputArea();
             }
         };
 

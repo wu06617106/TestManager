@@ -34,7 +34,7 @@
     <script type="text/ng-template" id="test_cases_renderer.html">
         <div class="tree-node-test-case">
             <div class="tree-node-content">
-                <a data-nodrag ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.TestCaseTitle}}</a>
+                <a data-nodrag ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.title}}</a>
                 <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeTestCase(this)"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
             </div>
@@ -55,7 +55,7 @@
                     <div class="form-group" ng-class="{'has-error' : !inputSection.title}">
                         <div id="inputTestCase" ng-show="isNodeSelected(this)">
                             <input ng-focus="isSectionInput.focus" ng-focus-lost="inputLostFocus()" type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title" value="node.title" />
-                            <button type="submit" class="btn btn-primary btn-xs" data-nodrag style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></button>
+                            <button type="submit" class="btn btn-primary btn-xs" data-nodrag ng-click="" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></button>
                             <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
     <div class="container">
         <div>
             <div>
-               
+                {{tree}}
             </div>
         </div>
     </div>
