@@ -48,7 +48,7 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
 
     var _removeSection = function (node) {
         var deferred = $q.defer();
-        $http.delete(serviceBase + 'Sections/DeleteSectionTree/' + node.id).success(function (response) {
+        $http.delete(serviceBase + 'Sections/DeleteSectionTree/' + node.SectionId).success(function (response) {
             deferred.resolve(response);
         }).error(function (err, status) {
             deferred.reject(err);
