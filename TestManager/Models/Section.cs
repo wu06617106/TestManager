@@ -21,5 +21,6 @@ namespace TestCaseManager.Models
         [StringLength(250)]
         public string ChildSectionIdList { get; set; }
 
+        public int? ParentId { get; set; }
     }
 }

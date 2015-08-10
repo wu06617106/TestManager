@@ -46,6 +46,16 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
+    var _removeSection = function (node) {
+        var deferred = $q.defer();
+        $http.delete(serviceBase + 'Sections/DeleteSectionTree/' + node.id).success(function (response) {
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+
     var _removeTestCase = function (node) {
         var deferred = $q.defer();
         $http.delete(serviceBase + 'TestCases/DeleteTestCase/' + node.id).success(function (response) {
@@ -72,5 +82,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     testCaseTreeFactory.createSection = _createSection;
     testCaseTreeFactory.editSection = _editSection;
     testCaseTreeFactory.removeTestCase = _removeTestCase;
+    testCaseTreeFactory.removeSection = _removeSection;
     return testCaseTreeFactory;
 }]);
