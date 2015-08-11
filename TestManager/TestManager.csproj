@@ -227,6 +227,7 @@
   <ItemGroup>
     <Content Include="app\Account\registerController.js" />
     <Content Include="app\initController.js" />
+    <Content Include="app\TestCaseTree\testCaseTreeController.js" />
     <Content Include="app\TestCaseTree\testCaseTreeDirectives.js" />
     <Content Include="app\TestCaseTree\testCaseTreeService.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
@@ -285,7 +286,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="app\TestCaseTree\testCaseTreeController.js" />
     <Content Include="app\Account\loginController.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
@@ -563,7 +563,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\TestCase\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
-    <Content Include="Views\TestCase\_Index.cshtml" />
     <Content Include="Views\Home\_Index.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
@@ -572,6 +571,7 @@
     <Content Include="Views\TestCase\_EditTestCase.cshtml" />
     <Content Include="Views\TestCase\TestCasesDetails.cshtml" />
     <Content Include="Views\TestCase\_TestCasesDetails.cshtml" />
+    <Content Include="Views\TestCase\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
