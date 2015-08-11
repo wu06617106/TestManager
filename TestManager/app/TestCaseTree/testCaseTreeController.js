@@ -98,8 +98,9 @@
                 "SectionId": $scope.sectionsData[index].SectionId,
                 "SectionTitle": $scope.sectionsData[index].SectionTitle,
                 "SectionDescription": $scope.sectionsData[index].SectionDescription,
-                "ChildSectionIdList": "",
-                "nodes": [],
+                "ParentId": null,
+                "ChildSectionIdList": $scope.sectionsData[index].ChildSectionIdList,
+                "childs": [],
                 "testcases": []
             };
             return nodeObj;
@@ -121,7 +122,7 @@
                 "SectionTitle": "node",
                 "SectionDescription": "",
                 "ChildSectionIdList": "",
-                "nodes": [],
+                "childs": [],
                 "testcases": []
             };
             testCaseTreeService.createSection(section).then(function (response) {
@@ -132,15 +133,12 @@
         };
 
         //edit tree node 
-        $scope.editNodeData;
-        $scope.animationsEnabled = true;
         $scope.editNode = function (node, size) {
             $scope.editNodeData = node.$modelValue;
             $location.path('/TestCase/EditTestCase/' + node.$modelValue.TestCaseId);
         };
 
         //get test case's detail
-        $scope.nodeDetailData;
         $scope.getNodeDetail = function (node, size) {
             $location.path('/TestCase/TestCasesDetails/' + node.$modelValue.TestCaseId);
         };
@@ -149,11 +147,11 @@
         $scope.newSubItem = function (node) {
             var nodeData = node.$modelValue;
             var section = {
-                "SectionTitle":nodeData.SectionTitle + '.' + (nodeData.nodes.length + 1),
+                "SectionTitle": nodeData.SectionTitle + '.' + (nodeData.childs.length + 1),
                 "SectionDescription": "",
                 "ChildSectionIdList": "",
                 "ParentId": nodeData.SectionId,
-                "nodes": [],
+                "childs": [],
                 "testcases": []
             };
             testCaseTreeService.createSection(section).then(function (createResponse) {
@@ -162,11 +160,12 @@
                     "SectionTitle":nodeData.SectionTitle,
                     "SectionDescription":nodeData.SectionDescription,
                     "ChildSectionIdList": nodeData.ChildSectionIdList + " " + createResponse.SectionId,
-                    "nodes": [],
+                    "ParentId": nodeData.SectionId,
+                    "childs": [],
                     "testcases": []
                 };
                 section.SectionId = createResponse.SectionId;
-                nodeData.nodes.push(section);
+                nodeData.childs.push(section);
                 testCaseTreeService.editSection(edit).then(function (editResponse) {
                     nodeData = editResponse;
                 },
@@ -178,9 +177,6 @@
         };
 
         //create new input name test case for current tree node
-        $scope.inputTestCase = { title: "" };
-        $scope.isTestCaseInput = { focus: false };
-        $scope.isSectionInput = { focus: false };
         $scope.newTestCase = function (node) {
             if ($scope.inputTestCase.title.length != 0)
             {
