@@ -9,6 +9,12 @@
         $scope.sectionsData = [];
         $scope.testCases = [];
         $scope.tree = [];
+        $scope.editNodeData;
+        $scope.animationsEnabled = true;
+        $scope.nodeDetailData;
+        $scope.inputTestCase = { title: "" };
+        $scope.isTestCaseInput = { focus: false };
+        $scope.isSectionInput = { focus: false };
 
         //remove section
         $scope.removeSection = function (node) {
@@ -74,20 +80,27 @@
             var i, j;
             for (i = 0; i < $scope.sectionsData.length; i++) {
                 var obj = createNodeObj(i);
-                var nodes = $scope.sectionsData[i].ChildSectionIdList;
-                var splittedNodes;
-                if (typeof nodes != 'undefined' && nodes != null && nodes != "") {
-                    splittedNodes = nodes.split(" ");
-                    for (j = 1; j < splittedNodes.length; j++) {
-                        var index = findSectionIndex(splittedNodes[j]);
-                        obj.node.nodes.push(createNodeObj(index).node);
-                        if ($scope.sectionsData[index].ChildSectionIdList != "") {
-                            $scope.sectionsData.splice(index, 1);
-                        }
-                    }
-                }
+                var childs = $scope.sectionsData[i].ChildSectionIdList;
+                insertSectionChilds(childs, obj);
                 initTestCasesData(obj);
                 $scope.tree.push(obj.node);  
+            }
+        };
+
+        var insertSectionChilds = function (childs, obj) {
+            var splittedNodes, j;
+            if (typeof childs != 'undefined' && childs != null && childs != "") {
+                splittedNodes = childs.split(" ");
+                for (j = 1; j < splittedNodes.length; j++) {
+                    var index = findSectionIndex(splittedNodes[j]);
+                    var child = createNodeObj(index);
+                    obj.node.childs.push(child.node);
+                    child.node.ParentId = obj.node.SectionId;
+                    if ($scope.sectionsData[index].ChildSectionIdList != "") {
+                        insertSectionChilds($scope.sectionsData[index].ChildSectionIdList, child);
+                    }
+                    $scope.sectionsData.splice(index, 1);
+                }
             }
         };
 
