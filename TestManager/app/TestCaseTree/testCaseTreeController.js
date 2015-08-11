@@ -9,12 +9,6 @@
         $scope.sectionsData = [];
         $scope.testCases = [];
         $scope.tree = [];
-        $scope.editNodeData;
-        $scope.animationsEnabled = true;
-        $scope.nodeDetailData;
-        $scope.inputTestCase = { title: "" };
-        $scope.isTestCaseInput = { focus: false };
-        $scope.isSectionInput = { focus: false };
 
         //remove section
         $scope.removeSection = function (node) {
@@ -80,27 +74,20 @@
             var i, j;
             for (i = 0; i < $scope.sectionsData.length; i++) {
                 var obj = createNodeObj(i);
-                var childs = $scope.sectionsData[i].ChildSectionIdList;
-                insertSectionChilds(childs, obj);
+                var nodes = $scope.sectionsData[i].ChildSectionIdList;
+                var splittedNodes;
+                if (typeof nodes != 'undefined' && nodes != null && nodes != "") {
+                    splittedNodes = nodes.split(" ");
+                    for (j = 1; j < splittedNodes.length; j++) {
+                        var index = findSectionIndex(splittedNodes[j]);
+                        obj.node.nodes.push(createNodeObj(index).node);
+                        if ($scope.sectionsData[index].ChildSectionIdList != "") {
+                            $scope.sectionsData.splice(index, 1);
+                        }
+                    }
+                }
                 initTestCasesData(obj);
                 $scope.tree.push(obj.node);  
-            }
-        };
-
-        var insertSectionChilds = function (childs, obj) {
-            var splittedNodes, j;
-            if (typeof childs != 'undefined' && childs != null && childs != "") {
-                splittedNodes = childs.split(" ");
-                for (j = 1; j < splittedNodes.length; j++) {
-                    var index = findSectionIndex(splittedNodes[j]);
-                    var child = createNodeObj(index);
-                    obj.node.childs.push(child.node);
-                    child.node.ParentId = obj.node.SectionId;
-                    if ($scope.sectionsData[index].ChildSectionIdList != "") {
-                        insertSectionChilds($scope.sectionsData[index].ChildSectionIdList, child);
-                    }
-                    $scope.sectionsData.splice(index, 1);
-                }
             }
         };
 
@@ -111,9 +98,8 @@
                 "SectionId": $scope.sectionsData[index].SectionId,
                 "SectionTitle": $scope.sectionsData[index].SectionTitle,
                 "SectionDescription": $scope.sectionsData[index].SectionDescription,
-                "ParentId": null,
-                "ChildSectionIdList": $scope.sectionsData[index].ChildSectionIdList,
-                "childs": [],
+                "ChildSectionIdList": "",
+                "nodes": [],
                 "testcases": []
             };
             return nodeObj;
@@ -135,7 +121,7 @@
                 "SectionTitle": "node",
                 "SectionDescription": "",
                 "ChildSectionIdList": "",
-                "childs": [],
+                "nodes": [],
                 "testcases": []
             };
             testCaseTreeService.createSection(section).then(function (response) {
@@ -146,12 +132,15 @@
         };
 
         //edit tree node 
+        $scope.editNodeData;
+        $scope.animationsEnabled = true;
         $scope.editNode = function (node, size) {
             $scope.editNodeData = node.$modelValue;
             $location.path('/TestCase/EditTestCase/' + node.$modelValue.TestCaseId);
         };
 
         //get test case's detail
+        $scope.nodeDetailData;
         $scope.getNodeDetail = function (node, size) {
             $location.path('/TestCase/TestCasesDetails/' + node.$modelValue.TestCaseId);
         };
@@ -160,11 +149,11 @@
         $scope.newSubItem = function (node) {
             var nodeData = node.$modelValue;
             var section = {
-                "SectionTitle": nodeData.SectionTitle + '.' + (nodeData.childs.length + 1),
+                "SectionTitle":nodeData.SectionTitle + '.' + (nodeData.nodes.length + 1),
                 "SectionDescription": "",
                 "ChildSectionIdList": "",
                 "ParentId": nodeData.SectionId,
-                "childs": [],
+                "nodes": [],
                 "testcases": []
             };
             testCaseTreeService.createSection(section).then(function (createResponse) {
@@ -173,12 +162,11 @@
                     "SectionTitle":nodeData.SectionTitle,
                     "SectionDescription":nodeData.SectionDescription,
                     "ChildSectionIdList": nodeData.ChildSectionIdList + " " + createResponse.SectionId,
-                    "ParentId": nodeData.SectionId,
-                    "childs": [],
+                    "nodes": [],
                     "testcases": []
                 };
                 section.SectionId = createResponse.SectionId;
-                nodeData.childs.push(section);
+                nodeData.nodes.push(section);
                 testCaseTreeService.editSection(edit).then(function (editResponse) {
                     nodeData = editResponse;
                 },
@@ -190,6 +178,9 @@
         };
 
         //create new input name test case for current tree node
+        $scope.inputTestCase = { title: "" };
+        $scope.isTestCaseInput = { focus: false };
+        $scope.isSectionInput = { focus: false };
         $scope.newTestCase = function (node) {
             if ($scope.inputTestCase.title.length != 0)
             {
