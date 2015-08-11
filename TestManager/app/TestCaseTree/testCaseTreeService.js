@@ -76,7 +76,7 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
-    var _editSection = function (section) {
+    var _editSectionChilds = function (section) {
         var deferred = $q.defer();
         $http.put(serviceBase + 'Sections/EditSectionChild' + '?id=' + section.SectionId + '&childIdString=' + section.ChildSectionIdList).success(function (response) {
             deferred.resolve(response);
@@ -91,7 +91,8 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
     testCaseTreeFactory.getTestCases = _getTestCases;
     testCaseTreeFactory.createSection = _createSection;
     testCaseTreeFactory.createTestCase = _createTestCase;
-    testCaseTreeFactory.editSection = _editSection;
+    testCaseTreeFactory.editSectionChilds = _editSectionChilds;
+
     testCaseTreeFactory.removeTestCase = _removeTestCase;
     testCaseTreeFactory.removeSection = _removeSection;
     return testCaseTreeFactory;

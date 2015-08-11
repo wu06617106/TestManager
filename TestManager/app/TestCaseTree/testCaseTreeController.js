@@ -15,6 +15,7 @@
         $scope.inputTestCase = { title: "" };
         $scope.isTestCaseInput = { focus: false };
         $scope.isSectionInput = { focus: false };
+        $scope.inputSection = { title: "" };
 
         //remove section
         $scope.removeSection = function (node) {
@@ -147,44 +148,12 @@
 
         //edit tree node 
         $scope.editNode = function (node, size) {
-            $scope.editNodeData = node.$modelValue;
-            $location.path('/Home/EditTestCase/' + $scope.editNodeData.TestCaseId);
-            //new modal instance
-            //var modalInstance = $modal.open({
-            //    animation: $scope.animationsEnabled,
-            //    templateUrl: 'editNodeModal.html',
-            //    controller: 'editNodeModalInstanceCtrl',
-            //    size: size,
-            //    resolve: {
-            //        detail: function () {
-            //            return $scope.editNodeData;
-            //        }
-            //    }
-            //});
-
-            //modalInstance.result.then(function (result) {
-            //    $scope.editNodeData.TestCaseTitle = result.TestCaseTitle;
-            //    $scope.editNodeData.TypeId = result.TypeId
-            //}, function () {
-            //    $log.info('Modal dismissed at: ' + new Date());
-            //});
+            $location.path('/TestCase/EditTestCase/' + node.$modelValue.TestCaseId);
         };
 
         //get test case's detail
         $scope.getNodeDetail = function (node, size) {
-            $scope.nodeDetailData = node.$modelValue;
-            //new modal instance
-            var modalInstance = $modal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'nodeDetailModal.html',
-                controller: 'detailNodeModalInstanceCtrl',
-                size: size,
-                resolve: {
-                    detail: function () {
-                        return $scope.nodeDetailData;
-                    }
-                }
-            });
+            $location.path('/TestCase/TestCaseDetails/' + node.$modelValue.TestCaseId);
         };
 
         //create new sub node for current tree node
@@ -210,7 +179,7 @@
                 };
                 section.SectionId = createResponse.SectionId;
                 nodeData.childs.push(section);
-                testCaseTreeService.editSection(edit).then(function (editResponse) {
+                testCaseTreeService.editSectionChilds(edit).then(function (editResponse) {
                     nodeData = editResponse;
                 },
                 function (err) {
@@ -246,7 +215,6 @@
         };
 
         //edit section title
-        $scope.inputSection = { title: "" };
         $scope.editSectionTitle = function (node) {
             if ($scope.inputSection.title.length != 0) {
                 node.title = $scope.inputSection.title;
