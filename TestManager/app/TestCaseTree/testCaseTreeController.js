@@ -4,7 +4,7 @@
     var testCaseTreeControllers = angular.module('testCaseTreeControllers', ['ui.tree']);
     
     //tree controller
-    testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', '$location', function ($scope, $modal, $log, testCaseTreeService, $location) {
+    testCaseTreeControllers.controller('testCaseTreeController', ['$scope', '$modal', '$log', 'testCaseTreeService', '$location', 'authService', function ($scope, $modal, $log, testCaseTreeService, $location, authService) {
 
         $scope.sectionsData = [];
         $scope.testCases = [];
@@ -16,6 +16,8 @@
         $scope.isTestCaseInput = { focus: false };
         $scope.isSectionInput = { focus: false };
         $scope.inputSection = { title: "" };
+
+        $scope.authentication = authService.authentication;
 
         //remove section
         $scope.removeSection = function (node) {
@@ -62,6 +64,7 @@
                     var testCase = {
                         "TestCaseId": $scope.testCases[i].TestCaseId,
                         "TestCaseTitle": $scope.testCases[i].TestCaseTitle,
+                        "LastEditPerson": $scope.testCases[i].LastEditPerson,
                         "SectionId": $scope.testCases[i].SectionId,
                         "TypeId": $scope.testCases[i].TypeId,
                         "PriorityId": $scope.testCases[i].PriorityId,
@@ -196,6 +199,7 @@
                 var nodeData = node.$modelValue;
                 var testCase = {
                     "TestCaseTitle": $scope.inputTestCase.title,
+                    "LastEditPerson": $scope.authentication.userName,
                     "SectionId": nodeData.SectionId,
                     "TypeId": 1,
                     "PriorityId": 1,
@@ -215,10 +219,15 @@
         };
 
         //edit section title
-        $scope.editSectionTitle = function (node) {
+        $scope.editSectionTitle = function (section) {
             if ($scope.inputSection.title.length != 0) {
-                node.title = $scope.inputSection.title;
-                $scope.closeInputArea();
+                testCaseTreeService.editSectionTitle(section, $scope.inputSection.title).then(function (editResponse) {
+                    section.SectionTitle = $scope.inputSection.title;
+                    $scope.inputSection.title = "";
+                    $scope.closeInputArea();
+                },
+                function (err) {
+                });
             }
         };
 

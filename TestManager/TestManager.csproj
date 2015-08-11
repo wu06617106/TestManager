@@ -573,7 +573,9 @@
     <Content Include="Views\TestCase\_TestCasesDetails.cshtml" />
     <Content Include="Views\TestCase\_Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\TestCases1\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

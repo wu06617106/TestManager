@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,6 +50,23 @@ namespace TestCaseManager.Controllers
             return PartialView("_EditTestCase", testCase);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _EditTestCase([Bind(Include = "TestCaseId,TestCaseTitle,LastEditPerson,SectionId,TypeId,PriorityId,Estimate,References,Preconditions,Steps,ExpectedResult")] TestCase testCase)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(testCase).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.PriorityId = new SelectList(db.Priorities, "PriorityId", "PriorityName", testCase.PriorityId);
+            ViewBag.SectionId = new SelectList(db.Sections, "SectionId", "SectionTitle", testCase.SectionId);
+            ViewBag.TypeId = new SelectList(db.Types, "TypeId", "TypeName", testCase.TypeId);
+            return PartialView("_EditTestCase", testCase);
+        }
+
+
         public ActionResult TestCasesDetails(int? id)
         {
             return View();
@@ -66,6 +84,15 @@ namespace TestCaseManager.Controllers
                 return HttpNotFound();
             }
             return PartialView("_TestCasesDetails", testCase);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

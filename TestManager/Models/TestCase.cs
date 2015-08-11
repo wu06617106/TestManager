@@ -26,7 +26,6 @@ namespace TestCaseManager.Models
 
         public int PriorityId { get; set; }
 
-        [Required]
         [StringLength(250)]
         public string Estimate { get; set; }
 
@@ -42,10 +41,6 @@ namespace TestCaseManager.Models
         [UIHint("tinymce_jquery_full"), AllowHtml]
         public string ExpectedResult { get; set; }
 
-        public virtual Priority Priority { get; set; }
 
-        public virtual Section Section { get; set; }
-
-        public virtual Type Type { get; set; }
     }
 }

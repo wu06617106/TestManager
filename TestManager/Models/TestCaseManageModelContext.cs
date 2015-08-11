@@ -21,10 +21,7 @@ namespace TestCaseManager.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Priority>()
-                .HasMany(e => e.TestCases)
-                .WithRequired(e => e.Priority)
-                .WillCascadeOnDelete(false);
+
 
         }
     }
