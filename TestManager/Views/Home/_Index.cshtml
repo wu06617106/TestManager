@@ -1,177 +1,28 @@
-﻿
+﻿<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="row" >
+    <div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" ng-submit="submit()">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="loginData.account" id="inputAccount" />
+                            </div>
 
-<div ng-init="init()">
-    <!-- Test cases node template -->
-    <script type="text/ng-template" id="nodes_renderer.html">
-        <div ui-tree-handle class="tree-node" data-type="testcases">
-            <div class="tree-node" data-type="testcases">
-                <div class="tree-node-content">
-                    <span style="color:black;cursor:default" class="text-info">{{node.SectionTitle}}</span>
-                    <span style="margin-right: 8px;cursor:default" class="pull-right btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)">Add Test Case</span>
-                    <!--input new test case title area-->
-                    <form ng-submit="newTestCase(this)">
-                        <div class="form-group" ng-class="{'has-error' : !inputTestCase.title}">
-                            <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                                <input ng-focus="isTestCaseInput.focus" ng-focus-lost="inputLostFocus()" type="text" class="form-control" id="inputTestCaseTitle" ng-model="inputTestCase.title" />
-                                <button class="btn btn-primary btn-xs" data-nodrag type="submit" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></button>
-                                <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                            <label class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" ng-model="loginData.password" id="inputPassword" />
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-primary" data-ng-click="login()">Login</button>
                     </form>
                 </div>
-            </div>
-        </div>
-        <ol ui-tree-nodes="" ng-model="node.testcases" ng-class="{hidden: collapsed}" data-type="subtestcases">
-            <li ng-repeat="node in node.testcases" ui-tree-node ng-include="'test_cases_renderer.html'" data-type="subtestcases">
-            </li>
-        </ol>
-        <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}" data-type="testcases">
-            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'" data-type="testcases">
-            </li>
-        </ol>
-    </script>
-    <!-- sub Test cases node template-->
-    <script type="text/ng-template" id="test_cases_renderer.html">
-        <div class="tree-node-test-case">
-            <div class="tree-node-content">
-                <a data-nodrag ng-click="getNodeDetail(this, 'lg')" style="cursor:default">{{node.TestCaseTitle}}</a>
-                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeTestCase(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="editNode(this, 'lg')" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
-            </div>
-        </div>
-    </script>
-
-    <!-- Section node template -->
-    <script type="text/ng-template" id="simple_nodes_renderer.html">
-        <div ui-tree-handle class="tree-node" data-type="section">
-            <div class="tree-node-content">
-                <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
-                <span style="color:black;cursor:default" class="text-info">{{node.SectionTitle}}</span>
-                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeSection(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
-                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="openInputArea(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
-                <!-- edit section name area-->
-                <form ng-submit="editSectionTitle(node)">
-                    <div class="form-group" ng-class="{'has-error' : !inputSection.title}">
-                        <div id="inputTestCase" ng-show="isNodeSelected(this)">
-                            <input ng-focus="isSectionInput.focus" ng-focus-lost="inputLostFocus()" type="text" class="form-control" id="inputSectionTitle" ng-model="inputSection.title" value="node.title" />
-                            <button type="submit" class="btn btn-primary btn-xs" data-nodrag ng-click="" style="margin-right: 8px;"><span class="glyphicon glyphicon-ok"></span></button>
-                            <a class="btn btn-danger btn-xs" data-nodrag ng-click="closeInputArea(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}" data-type="section">
-            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'simple_nodes_renderer.html'" data-type="section">
-            </li>
-        </ol>
-    </script>
-
-    <!-- Edit node modal template -->
-    <script type="text/ng-template" id="editNodeModal.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Edit Test Cases</h3>
-        </div>
-        <div class="modal-body row">
-            <div class="form-group col-md-12" ng-class="{'has-error' : !editNodeData.title}">
-                <label>Title</label>
-                <input type="text" ng-model="editNodeData.title" class="form-control"
-                       tooltip="Please input the title!"
-                       tooltip-placement="top"
-                       tooltip-trigger="mouseenter"
-                       tooltip-enable="!editNodeData.title" />
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <label>Type</label>
-                    <select class="form-control" ng-model="editNodeType" ng-options="type.name for type in types"></select>
-                </div>
-                <div class="col-md-3">
-                    <label>Priority</label>
-                    <select class="form-control" ng-model="editNodeType" ng-options="type.name for type in types"></select>
-                </div>
-                <div class="col-md-3">
-                    <label>Estimate</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <label>References</label>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-    <!-- Detail node modal template -->
-    <script type="text/ng-template" id="nodeDetailModal.html">
-        <div class="modal-header">
-            <h3 class="modal-title">{{detailNode.TestCaseTitle}}</h3>
-        </div>
-        <div class="modal-body">
-            <div class="col-md-push-2 form-group">
-                <h3 class="label label-default">Type</h3>
-                <div>
-                    {{detailNode.TypeId}}
-                </div>
-            </div>
-            <div class="col-md-push-2 form-group">
-                <h3 class="label label-default">Priority</h3>
-                <div>
-                    {{detailNode.PriorityId}}
-                </div>
-            </div>
-            <div class="col-md-pull-2 form-group">
-                <h3 class="label label-default">Estimate</h3>
-                <div>
-                    {{detailNode.Estimate}}
-                </div>
-            </div>
-            <div class="col-md-pull-2 form-group">
-                <h3 class="label label-default">References</h3>
-                <div>
-                    {{detailNode.References}}
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="close()">Close</button>
-        </div>
-    </script>
-    <!-- Test Cases Tree -->
-    <div class="col-sm-8 container">
-        <div class="row">
-            <div class="col-sm-8">
-                <h3>Test Cases</h3>
-                <div ui-tree="options" id="tree-root">
-                    <ol ui-tree-nodes ng-model="tree" data-type="testcases">
-                        <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer.html'" data-type="testcases"></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Sections Tree -->
-    <div class="col-sm-4 container">
-        <div class="row">
-            <div>
-                <h3>Sections<a class="pull-right btn btn-primary btn-xs" ng-click="insertNewNode()" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a></h3>
-                <div ui-tree="options" id="tree-root">
-                    <ol ui-tree-nodes ng-model="tree" data-type="section">
-                        <li ng-repeat="node in tree" ui-tree-node ng-include="'simple_nodes_renderer.html'" data-type="section"></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div>
-            <div>
-                
+                <div class="alert alert-success" ng-style="successMsgVisible"><p>Login Successful!</p></div>
+                <div class="alert alert-danger" ng-style="errorMsgVisible"><p>{{errorMessage}}</p></div>
             </div>
         </div>
     </div>

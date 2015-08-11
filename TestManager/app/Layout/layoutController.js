@@ -3,11 +3,11 @@ var layoutControllers = angular.module('layoutControllers', []);
 layoutControllers.controller('layoutController', ['$scope', '$location', 'authService', 'localStorageService', function ($scope, $location, authService, localStorageService) {
     $scope.logOut = function () {
         authService.logOut();
-        $location.path('/Home/Login');
+        $location.path('/Home/Index');
     }
 
     $scope.logIn = function () {
-        $location.path('/Home/Login');
+        $location.path('/Home/Index');
     }
 
     $scope.register = function () {
@@ -18,9 +18,9 @@ layoutControllers.controller('layoutController', ['$scope', '$location', 'authSe
     $scope.load = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
-            $location.path('/Home/Index');
+            $location.path('/TestCase/Index');
         } else {
-            $location.path('/Home/Login"');
+            $location.path('/Home/Index');
         }
     }
 }]);

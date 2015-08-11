@@ -41,6 +41,7 @@ namespace TestCaseManager.Controllers
                                 {
                                     TestCaseId = t.TestCaseId,
                                     TestCaseTitle = t.TestCaseTitle,
+                                    LastEditPerson =t.LastEditPerson,
                                     SectionId = t.SectionId,
                                     TypeId = t.TypeId,
                                     PriorityId = t.PriorityId,
@@ -65,6 +66,7 @@ namespace TestCaseManager.Controllers
             TestCaseDTO testDTO = new TestCaseDTO();
             testDTO.TestCaseId = testCase.TestCaseId;
             testDTO.TestCaseTitle = testCase.TestCaseTitle;
+            testDTO.LastEditPerson = testCase.LastEditPerson;
             testDTO.SectionId = testCase.SectionId;
             testDTO.TypeId = testCase.TypeId;
             testDTO.PriorityId = testCase.PriorityId;

@@ -197,14 +197,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
+    <Compile Include="Controllers\TestCaseController.cs" />
     <Compile Include="Controllers\TestCasesController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -563,21 +561,17 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\TestSection.cshtml" />
+    <Content Include="Views\TestCase\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
-    <Content Include="Views\Test\Create.cshtml" />
-    <Content Include="Views\Test\Delete.cshtml" />
-    <Content Include="Views\Test\Details.cshtml" />
-    <Content Include="Views\Test\Edit.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\TestCase\_Index.cshtml" />
     <Content Include="Views\Home\_Index.cshtml" />
-    <Content Include="Views\Home\_Login.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\EditTestCase.cshtml" />
-    <Content Include="Views\Home\_EditTestCase.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\TestCase\EditTestCase.cshtml" />
+    <Content Include="Views\TestCase\_EditTestCase.cshtml" />
+    <Content Include="Views\TestCase\TestCasesDetails.cshtml" />
+    <Content Include="Views\TestCase\_TestCasesDetails.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

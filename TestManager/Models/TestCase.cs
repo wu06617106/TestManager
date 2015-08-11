@@ -16,6 +16,10 @@ namespace TestCaseManager.Models
         [StringLength(250)]
         public string TestCaseTitle { get; set; }
 
+        [Required]
+        [StringLength(250)]
+        public string LastEditPerson { get; set; }
+
         public int SectionId { get; set; }
 
         public int TypeId { get; set; }

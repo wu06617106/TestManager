@@ -6,14 +6,14 @@ var testManagerApp = angular.module('testManagerApp', ['ngRoute', 'angular-loadi
 
 testManagerApp.config(['$routeProvider', function ($routeProvider) {
 
-    $routeProvider.when("/Home/Index", {
+    $routeProvider.when("/TestCase/Index", {
         controller: "testCaseTreeController",
-        templateUrl: "/Home/_Index"
+        templateUrl: "/TestCase/_Index"
     });
 
-    $routeProvider.when("/Home/Login", {
+    $routeProvider.when("/Home/Index", {
         controller: "loginController",
-        templateUrl: "/Home/_Login"
+        templateUrl: "/Home/_Index"
     });
 
     $routeProvider.when("/Home/Register", {
@@ -21,14 +21,19 @@ testManagerApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: "/Home/_Register"
     });
 
-    $routeProvider.when("/Home/EditTestCase/:id", {
+    $routeProvider.when("/TestCase/EditTestCase/:id", {
         templateUrl: function(params) {
-            return '/Home/_EditTestCase/' + params.id;
+            return '/TestCase/_EditTestCase/' + params.id;
         }
-        //templateUrl: "/Home/_EditTestCase/4"
     });
 
-    $routeProvider.otherwise({ redirectTo: "/Home/Login" });
+    $routeProvider.when("/TestCase/TestCasesDetails/:id", {
+        templateUrl: function (params) {
+            return '/TestCase/_TestCasesDetails/' + params.id;
+        }
+    });
+
+    $routeProvider.otherwise({ redirectTo: "/Home/Index" });
 }]);
 
 testManagerApp.run(['authService', function (authService) {

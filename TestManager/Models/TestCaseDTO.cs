@@ -11,6 +11,8 @@ namespace TestCaseManager.Models
 
         public string TestCaseTitle { get; set; }
 
+        public string LastEditPerson { get; set; }
+
         public int SectionId { get; set; }
 
         public int TypeId { get; set; }
