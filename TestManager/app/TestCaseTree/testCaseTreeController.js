@@ -153,7 +153,7 @@
 
         //get test case's detail
         $scope.getNodeDetail = function (node, size) {
-            $location.path('/TestCase/TestCaseDetails/' + node.$modelValue.TestCaseId);
+            $location.path('/TestCase/TestCasesDetails/' + node.$modelValue.TestCaseId);
         };
 
         //create new sub node for current tree node
