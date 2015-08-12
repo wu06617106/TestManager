@@ -18,7 +18,10 @@ layoutControllers.controller('layoutController', ['$scope', '$location', 'authSe
     $scope.load = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
-            $location.path('/TestCase/Index');
+            if ($location.path() == '/Home/Index')
+            {
+                $location.path('/TestCase/Index');
+            }           
         } else {
             $location.path('/Home/Index');
         }

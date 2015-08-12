@@ -1,6 +1,6 @@
 ﻿'use strict';
 var controllers = angular.module('controllers', ['layoutControllers', 'testCaseTreeControllers', 'loginControllers', 'registerControllers', 'layoutControllers']);
-var services = angular.module('services', ['authInterceptorService', 'authService', 'testCaseTreeService']);
+var services = angular.module('services', ['authInterceptorService', 'authService', 'testApiService', 'testCaseTreeService']);
 var directives = angular.module('directives', ['testCaseTreeDirectives']);
 var testManagerApp = angular.module('testManagerApp', ['ngRoute', 'angular-loading-bar', 'LocalStorageModule', 'ui.bootstrap', 'controllers', 'services', 'directives']);
 
@@ -9,6 +9,11 @@ testManagerApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when("/TestCase/Index", {
         controller: "testCaseTreeController",
         templateUrl: "/TestCase/_Index"
+    });
+
+    $routeProvider.when("/TestPlan/Index", {
+        controller: "testPlanController",
+        templateUrl: "/TestPlan/_Index"
     });
 
     $routeProvider.when("/Home/Index", {

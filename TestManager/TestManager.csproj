@@ -202,6 +202,7 @@
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\TestCaseController.cs" />
     <Compile Include="Controllers\TestCasesController.cs" />
+    <Compile Include="Controllers\TestPlanController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -225,15 +226,17 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\Account\registerController.js" />
-    <Content Include="app\initController.js" />
-    <Content Include="app\TestCaseTree\testCaseTreeController.js" />
-    <Content Include="app\TestCaseTree\testCaseTreeDirectives.js" />
-    <Content Include="app\TestCaseTree\testCaseTreeService.js" />
+    <Content Include="app\Controllers\registerController.js" />
+    <Content Include="app\Controllers\initController.js" />
+    <Content Include="app\Services\testApiService.js" />
+    <Content Include="app\Controllers\testCaseTreeController.js" />
+    <Content Include="app\Directives\testCaseTreeDirectives.js" />
+    <Content Include="app\Services\testCaseTreeService.js" />
+    <Content Include="app\Controllers\testPlanController.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
-    <Content Include="app\Account\authInterceptorService.js" />
-    <Content Include="app\Account\authService.js" />
-    <Content Include="app\Layout\layoutController.js" />
+    <Content Include="app\Services\authInterceptorService.js" />
+    <Content Include="app\Services\authService.js" />
+    <Content Include="app\Controllers\layoutController.js" />
     <Content Include="Scripts\AngularLoadingBar\loading-bar.min.js" />
     <Content Include="app\test-manager-app.js" />
     <Content Include="App_Data\TestCaseManageDatabase.mdf" />
@@ -286,7 +289,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="app\Account\loginController.js" />
+    <Content Include="app\Controllers\loginController.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -572,10 +575,10 @@
     <Content Include="Views\TestCase\TestCasesDetails.cshtml" />
     <Content Include="Views\TestCase\_TestCasesDetails.cshtml" />
     <Content Include="Views\TestCase\_Index.cshtml" />
+    <Content Include="Views\TestPlan\Index.cshtml" />
+    <Content Include="Views\TestPlan\_Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\TestCases1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

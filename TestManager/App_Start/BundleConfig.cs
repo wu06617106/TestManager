@@ -40,18 +40,21 @@ namespace TestCaseManager
                         "~/app/test-manager-app.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
-                        "~/app/TestCaseTree/testCaseTreeController.js",
-                        "~/app/Account/loginController.js",
-                        "~/app/Account/registerController.js",
-                        "~/app/Layout/layoutController.js"));
+                        "~/app/Controllers/testCaseTreeController.js",
+                        "~/app/Controllers/loginController.js",
+                        "~/app/Controllers/registerController.js",
+                        "~/app/Controllers/layoutController.js",
+                        "~/app/Controllers/testPlanController.js",
+                        "~/app/Controllers/initController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/directives").Include(
-                        "~/app/TestCaseTree/testCaseTreeDirectives.js"));
+                        "~/app/Directives/testCaseTreeDirectives.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/services").Include(
-                        "~/app/Account/authInterceptorService.js",
-                        "~/app/Account/authService.js",
-                        "~/app/TestCaseTree/testCaseTreeService.js"));
+                        "~/app/Services/authInterceptorService.js",
+                        "~/app/Services/authService.js",
+                        "~/app/Services/testCaseTreeService.js",
+                        "~/app/Services/testApiService.js"));
             
         }
     }

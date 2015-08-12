@@ -1,10 +1,10 @@
 ﻿'use strict';
 
-var testCaseTreeService = angular.module('testCaseTreeService', []);
+var testApiService = angular.module('testApiService', []);
 
-testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($http, $q) {
+testApiService.factory('testApiService', ['$http', '$q', function ($http, $q) {
     var serviceBase = 'http://localhost:4789/api/';
-    var testCaseTreeFactory = {};
+    var testApiFactory = {};
 
     var _getSections = function () {
         var deferred = $q.defer();
@@ -96,14 +96,14 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', function ($ht
         return deferred.promise;
     };
 
-    testCaseTreeFactory.getSections = _getSections;
-    testCaseTreeFactory.getTypes = _getTypes;
-    testCaseTreeFactory.getTestCases = _getTestCases;
-    testCaseTreeFactory.createSection = _createSection;
-    testCaseTreeFactory.createTestCase = _createTestCase;
-    testCaseTreeFactory.editSectionChilds = _editSectionChilds;
-    testCaseTreeFactory.editSectionTitle = _editSectionTitle;
-    testCaseTreeFactory.removeTestCase = _removeTestCase;
-    testCaseTreeFactory.removeSection = _removeSection;
-    return testCaseTreeFactory;
+    testApiFactory.getSections = _getSections;
+    testApiFactory.getTypes = _getTypes;
+    testApiFactory.getTestCases = _getTestCases;
+    testApiFactory.createSection = _createSection;
+    testApiFactory.createTestCase = _createTestCase;
+    testApiFactory.editSectionChilds = _editSectionChilds;
+    testApiFactory.editSectionTitle = _editSectionTitle;
+    testApiFactory.removeTestCase = _removeTestCase;
+    testApiFactory.removeSection = _removeSection;
+    return testApiFactory;
 }]);
