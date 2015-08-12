@@ -5,7 +5,7 @@ initControllers.controller('initController', ['$scope', '$location', 'localStora
     {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
-            $location.path('/Home/Index');
+            $location.path('/TestCase/Index');
         } else {
             $location.path('/Home/Login"');
         }

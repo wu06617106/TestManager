@@ -45,7 +45,8 @@ namespace TestCaseManager
                         "~/app/Controllers/registerController.js",
                         "~/app/Controllers/layoutController.js",
                         "~/app/Controllers/testPlanController.js",
-                        "~/app/Controllers/initController.js"));
+                        "~/app/Controllers/initController.js",
+                        "~/app/Controllers/tabController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/directives").Include(
                         "~/app/Directives/testCaseTreeDirectives.js"));

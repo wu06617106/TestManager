@@ -228,6 +228,7 @@
   <ItemGroup>
     <Content Include="app\Controllers\registerController.js" />
     <Content Include="app\Controllers\initController.js" />
+    <Content Include="app\Controllers\tabController.js" />
     <Content Include="app\Services\testApiService.js" />
     <Content Include="app\Controllers\testCaseTreeController.js" />
     <Content Include="app\Directives\testCaseTreeDirectives.js" />
@@ -575,8 +576,8 @@
     <Content Include="Views\TestCase\TestCasesDetails.cshtml" />
     <Content Include="Views\TestCase\_TestCasesDetails.cshtml" />
     <Content Include="Views\TestCase\_Index.cshtml" />
-    <Content Include="Views\TestPlan\Index.cshtml" />
-    <Content Include="Views\TestPlan\_Index.cshtml" />
+    <Content Include="Views\TestPlan\AddTestPlan.cshtml" />
+    <Content Include="Views\TestPlan\_AddTestPlan.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

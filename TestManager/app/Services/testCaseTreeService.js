@@ -15,6 +15,7 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', 'testApiServi
     // build the tree
     var _init = function () {
         var deferred = $q.defer();
+        testCaseTreeFactory.tree = [];
         testApiService.getTestCases().then(function (response) {
             testCaseTreeFactory.testCases = response;
             testApiService.getSections().then(function (response) {

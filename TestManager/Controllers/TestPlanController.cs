@@ -8,16 +8,16 @@ namespace TestCaseManager.Controllers
 {
     public class TestPlanController : Controller
     {
-        public ActionResult Index()
+        public ActionResult AddTestPlan()
         {
-            ViewBag.Title = "Test Plan";
+            ViewBag.Title = "Add Test Plan";
 
             return View();
         }
 
-        public ActionResult _Index()
+        public ActionResult _AddTestPlan()
         {
-            return PartialView("_Index");
+            return PartialView("_AddTestPlan");
         }
     }
 }

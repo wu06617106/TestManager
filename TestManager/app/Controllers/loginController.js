@@ -15,7 +15,7 @@ loginControllers.controller('loginController', ['$scope', '$location', 'authServ
 
         authService.login($scope.loginData).then(function (response) {
             $scope.person = response;
-            $location.path('/Home/Index');
+            $location.path('/TestCase/Index');
             $scope.successMsgVisible = { 'visibility': 'visible' };
             $scope.errorMsgVisible = { 'visibility': 'hidden' };
         },

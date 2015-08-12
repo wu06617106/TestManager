@@ -41,6 +41,13 @@
     <hr />
 
     <div class="container body-content">
+        <div ng-controller="tabController">
+            <tabset justified="true"type="pills"  ng-hide="!authentication.isAuth">
+                <tab heading="Test Cases" select="redirectToTestCase()"></tab>
+                <tab heading="Test Plan" select="redirectToTestPlan()"></tab>
+            </tabset>
+        </div>
+
         @RenderBody()
         <hr />
         <footer></footer>
