@@ -33,6 +33,14 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', 'testApiServi
         return deferred.promise;
     };
 
+    var _getTree = function () {
+       _init().then(function (response) {
+           return testCaseTreeFactory.tree;
+        },
+            function (err) {   
+        });
+    };
+
     // update tree data
     var _updateTree = function (tree) {
         testCaseTreeFactory.tree = tree;
@@ -116,5 +124,6 @@ testCaseTreeService.factory('testCaseTreeService', ['$http', '$q', 'testApiServi
 
     testCaseTreeFactory.init = _init;
     testCaseTreeFactory.updateTree = _updateTree;
+    testCaseTreeFactory.getTree = _getTree;
     return testCaseTreeFactory;
 }]);

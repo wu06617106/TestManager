@@ -44,7 +44,7 @@ namespace TestCaseManager
                         "~/app/Controllers/loginController.js",
                         "~/app/Controllers/registerController.js",
                         "~/app/Controllers/layoutController.js",
-                        "~/app/Controllers/testPlanController.js",
+                        "~/app/Controllers/addTestPlanController.js",
                         "~/app/Controllers/initController.js",
                         "~/app/Controllers/tabController.js"));
 

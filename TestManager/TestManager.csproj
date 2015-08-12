@@ -233,7 +233,7 @@
     <Content Include="app\Controllers\testCaseTreeController.js" />
     <Content Include="app\Directives\testCaseTreeDirectives.js" />
     <Content Include="app\Services\testCaseTreeService.js" />
-    <Content Include="app\Controllers\testPlanController.js" />
+    <Content Include="app\Controllers\addTestPlanController.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
     <Content Include="app\Services\authInterceptorService.js" />
     <Content Include="app\Services\authService.js" />
